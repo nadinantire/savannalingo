@@ -1,0 +1,14 @@
+<div class="content-block">
+  <%= f.label :content_type %>
+  <%= f.select :content_type, PostContentBlock.content_types.keys %>
+
+  <%= f.label :content %>
+  <%= f.text_area :content %>
+
+  <%= f.label :image %>
+  <%= f.file_field :image %>
+
+  <%= f.hidden_field :position %>
+
+  <%= link_to "Remove", "#", class: "remove-content-block" %>
+</div>

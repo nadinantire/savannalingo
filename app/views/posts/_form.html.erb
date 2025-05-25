@@ -1,0 +1,65 @@
+<%= form_with(model: post) do |form| %>
+  <% if post.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+        <% post.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :title, style: "display: block" %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div>
+    <%= form.label :body, style: "display: block" %>
+    <%= form.text_area :body %>
+  </div>
+
+  <div>
+    <%= form.label :status, style: "display: block" %>
+    <%= form.text_field :status %>
+  </div>
+  <%= form.label :images, "Upload Images" %><br>
+  <%= form.file_field :images, multiple: true %>
+
+  <div>
+    <%= form.label :published_at, style: "display: block" %>
+    <%= form.datetime_field :published_at %>
+  </div>
+
+  <div>
+    <%= form.hidden_field :user_id, value: current_user.id %>
+  </div>
+ <div id="content-blocks">
+  <%= form.fields_for :post_content_blocks do |block_form| %>
+    <%= render "post_content_block_fields", f: block_form %>
+  <% end %>
+</div>
+<div id="content-blocks">
+  <%= form.fields_for :post_content_blocks do |block_form| %>
+    <%= render "post_content_block_fields", f: block_form %>
+  <% end %>
+</div>
+
+<!-- Hidden template here -->
+<div id="post_content_block_template" style="display:none;">
+  <%= form.fields_for :post_content_blocks, PostContentBlock.new, child_index: "new_post_content_blocks" do |f| %>
+    <%= render "post_content_block_fields", f: f %>
+  <% end %>
+</div>
+
+<button type="button" class="add-content-block">Add Content Block</button>
+
+
+
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
