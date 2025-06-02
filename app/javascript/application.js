@@ -32,3 +32,6 @@ document.addEventListener('turbo:load', () => {
 });
 
 
+
+import "trix"
+import "@rails/actiontext"

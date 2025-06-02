@@ -1,7 +1,9 @@
 {
   "dependencies": {
+    "@rails/actiontext": "^8.0.200",
     "rails_admin": "3.3.0",
-    "sass": "^1.89.0"
+    "sass": "^1.89.0",
+    "trix": "^2.1.15"
   },
   "scripts": {
     "build": "esbuild app/javascript/*.* --bundle --outdir=app/assets/builds",
