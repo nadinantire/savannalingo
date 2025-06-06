@@ -1,9 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "Savanalingo" %></title>
+    <title>Savanna Lingo</title>
+    <%= favicon_link_tag 'logo.jpeg' %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="turbo-cache-control" content="no-cache">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -27,8 +32,9 @@
 <%= button_to 'Logout', destroy_user_session_path, method: :delete, data: { turbo: false } %>
   <% else %>
     <%= link_to 'Sign Up', new_user_registration_path %> |
-    <%= link_to 'Log In', new_user_session_path %>
+    <%= linkkkkkk8_to 'Log In', new_user_session_path %>
   <% end %>
+    <%= render 'pages/header' %>
 
     <%= yield %>
   </body>

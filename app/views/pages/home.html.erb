@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="<%= asset_path('logo.jpeg') %>">
+    <title>Home | Savanna Lingo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #3b82f6;
+            --primary-dark: #2563eb;
+            --secondary: #10b981;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --light-gray: #f1f5f9;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        /* Navigation */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+        }
+        
+        .logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .nav-links a.active {
+            color: var(--primary);
+        }
+        
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark);
+        }
+        
+        /* Hero Section */
+.hero {
+    padding: 2rem 0;
+    background-color: var(--primary);
+    color: white;
+    background-image: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+}
+
+.hero-content {
+    display: flex;
+    flex-direction: row;  /* Use row direction for horizontal alignment */
+    gap: 1.5rem;
+    align-items: center; /* Center-align vertically */
+    max-width: 100%;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+.cta-btn {
+    display: inline-block;
+    background-color: white;
+    color: var(--primary);
+    padding: 0.8rem 1.5rem;
+    border-radius: 5px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    max-width: fit-content;
+}
+
+.cta-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Hero Slider */
+.hero-slider {
+    position: relative;
+    display: flex;
+    overflow: hidden;
+    justify-content: center; /* Center the content */
+}
+
+.hero-slide {
+    display: none;
+    width: 100%;
+    justify-content: center;
+    animation: fade 1s ease-in-out;
+}
+
+.hero-slide.active {
+    display: flex;
+}
+
+/* Ensure Image and Text are in separate columns (side by side) */
+.hero-slide .hero-img-container {
+    width: 50%;
+    padding-right: 1.5rem;
+}
+
+.hero-slide .hero-text-container {
+    width: 50%;
+    padding-left: 1.5rem;
+    color: white;
+}
+
+.hero-img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* Hero Text Styles */
+.hero-text-container h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.hero-text-container p {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Navigation Buttons */
+.slider-nav {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+    z-index: 10;
+}
+
+.prev-btn,
+.next-btn {
+    background-color: rgba(0, 0, 0, 0.3);
+    color: white;
+    padding: 1rem;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+}
+
+.prev-btn:hover,
+.next-btn:hover {
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+/* Slide Transition Animation */
+@keyframes fade {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        width: 100%;
+        max-width: 100%;
+        padding: 0 1rem; /* small side padding */
+    }
+
+    .hero-content {
+    flex-direction: column;  /* Use row direction for horizontal alignment */
+    gap: 0.5rem;
+    align-items: center; /* Center-align vertically */
+    max-width: 100%;
+}
+
+    .hero-slider {
+        display: block;
+        width: 100%;
+    }
+
+    .hero-slide {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .hero-img-container,
+    .hero-text-container {
+        width: 100%; /* now they will be 80% inside 100% slide */
+        padding: 1rem 0;
+    }
+
+    .hero-text-container h1,
+    .hero-text-container p {
+        text-align: center;
+    }
+
+    .hero-text-container h1 {
+        font-size: 2rem;
+    }
+
+    .hero-text-container p {
+        font-size: 1rem;
+    }
+}
+
+
+
+
+        /* Services Section */
+        .section {
+            padding: 5rem 0;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+        
+        .section-subtitle {
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .service-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* .service-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        } */
+
+        .service-icon {
+            /* height: 80px;
+            width: 80px; */
+            margin: 0 auto 1rem auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--light-gray);
+            /* border-radius: 50%; */
+            overflow: hidden;
+        }
+
+        .service-icon img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        
+        .service-title {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* Blog Preview Section */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .blog-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .blog-img {
+            width: 100%;
+            height: 200px;
+            background-color: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .blog-img img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain; /* Use 'cover' if you prefer filling without distortion */
+        }
+
+        
+        .blog-content {
+            padding: 1.5rem;
+        }
+        
+        .blog-date {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .blog-title {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .read-more {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        /* Books Section */
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .book-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .book-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .book-img {
+            width: 100%;
+            height: 300px;
+            background-color: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .book-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .book-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .book-author {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        .book-price {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.2rem;
+            margin-top: auto;
+            margin-bottom: 1rem;
+        }
+        
+        .buy-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.8rem;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .buy-btn:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .book-img img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .footer-logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: white;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-desc {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .footer-social a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-social a:hover {
+            color: var(--primary);
+        }
+        
+        .footer-heading {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Blog Page Specific */
+        .blog-banner {
+            background-color: var(--primary);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .blog-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 3rem 20px;
+        }
+        
+        .blog-post {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .blog-post-header {
+            margin-bottom: 1.5rem;
+        }
+        
+        .blog-post-title {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .blog-post-meta {
+            color: var(--gray);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .blog-post-content p {
+            margin-bottom: 1rem;
+        }
+        
+        /* Books Page Specific */
+        .books-banner {
+            background-color: var(--secondary);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .books-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 20px;
+        }
+        
+        .books-filter {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .books-search {
+            flex-grow: 1;
+            max-width: 400px;
+            position: relative;
+        }
+        
+        .books-search input {
+            width: 100%;
+            padding: 0.8rem 1rem 0.8rem 2.5rem;
+            border-radius: 5px;
+            border: 1px solid var(--light-gray);
+            font-size: 1rem;
+        }
+        
+        .books-search i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray);
+        }
+        
+        .books-sort select {
+            padding: 0.8rem;
+            border-radius: 5px;
+            border: 1px solid var(--light-gray);
+            font-size: 1rem;
+            color: var(--dark);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+
+        .logo img {
+            height: 80px;
+            width: auto;
+        }
+
+        .logo span {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background-color: white;
+                flex-direction: column;
+                gap: 0;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            }
+            
+            .nav-links.active {
+                max-height: 300px;
+            }
+            
+            .nav-links li {
+                width: 100%;
+            }
+            
+            .nav-links a {
+                display: block;
+                padding: 1rem 2rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">
+                    <%= image_tag("logo.jpeg", alt: "Savanna Lingo Ltd Logo") %>
+                    <span>Savanna Lingo</span>
+                </a>
+                
+                <button class="mobile-menu-btn">≡</button>
+                <ul class="nav-links">
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="books.html">Books</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Content - Changes based on which page is active -->
+    <div id="pageContent">
+        <!-- HOME PAGE CONTENT -->
+        <!-- Hero Section with Slider -->
+        <!-- Hero Section with Slider -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-slider">
+                    <!-- First Slide (Active) -->
+                    <div class="hero-slide active">
+                        <div class="hero-img-container">
+                            <%= image_tag("translate.png", alt: "Translation Service", class: "hero-img") %>
+                        </div>
+                        <div class="hero-text-container">
+                            <h1>Professional Translation & Marketing Services</h1>
+                            <p>Elevate your global presence with our expert translation, social media marketing, and content creation services.</p>
+                            <a href="#services" class="cta-btn">Explore Our Services</a>
+                        </div>
+                    </div>
+        
+                    <!-- Second Slide (No active class) -->
+                    <div class="hero-slide">
+                        <div class="hero-img-container">
+                            <%= image_tag("marketing.png", alt: "Social Media Marketing", class: "hero-img") %>
+                        </div>
+                        <div class="hero-text-container">
+                            <h1>Social Media Marketing</h1>
+                            <p>Grow your online presence with strategic campaigns tailored to your brand.</p>
+                            <a href="#services" class="cta-btn">Explore Our Services</a>
+                        </div>
+                    </div>
+        
+                    <!-- Third Slide (No active class) -->
+                    <div class="hero-slide">
+                        <div class="hero-img-container">
+                            <%= image_tag("content-creation.jpeg", alt: "Translation Service", class: "hero-img") %>
+                        </div>
+                        <div class="hero-text-container">
+                            <h1>Creative Content Creation</h1>
+                            <p>Engaging content that connects with your audience and drives meaningful action.</p>
+                            <a href="#services" class="cta-btn">Explore Our Services</a>
+                        </div>
+                    </div>
+                </div>
+        
+                <!-- Navigation -->
+                <div class="slider-nav">
+                    <button class="prev-btn" onclick="prevSlide()">❮</button>
+                    <button class="next-btn" onclick="nextSlide()">❯</button>
+                </div>
+            </div>
+        </section>
+        
+        
+        <script>
+            let currentSlide = 0;
+            const slides = document.querySelectorAll('.hero-slide');
+            const totalSlides = slides.length;
+            let slideInterval = setInterval(nextSlide, 5000); // Start auto-slide
+        
+            function showSlide(index) {
+                // Keep index within bounds
+                if (index >= totalSlides) currentSlide = 0;
+                if (index < 0) currentSlide = totalSlides - 1;
+        
+                slides.forEach(slide => slide.classList.remove('active'));
+                slides[currentSlide].classList.add('active');
+            }
+        
+            function nextSlide() {
+                currentSlide++;
+                showSlide(currentSlide);
+            }
+        
+            function prevSlide() {
+                currentSlide--;
+                showSlide(currentSlide);
+            }
+        
+            // Pause on hover
+            const slider = document.querySelector('.hero-slider');
+            slider.addEventListener('mouseover', () => clearInterval(slideInterval));
+            slider.addEventListener('mouseout', () => slideInterval = setInterval(nextSlide, 5000));
+        </script>
+        
+        
+
+        
+
+
+        <section id="services" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Our Services</h2>
+                    <p class="section-subtitle">Comprehensive solutions to help your business thrive in the global marketplace.</p>
+                </div>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <%= image_tag("translation.jpeg", alt: "Translation Service") %>
+
+                        </div>
+                        <h3 class="service-title">Translation Services</h3>
+                        <p>Professional translation services in multiple languages. We ensure accuracy and cultural nuance in every project.</p>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <%= image_tag("social-media.jpeg", alt: "Translation Service") %>
+                        </div>
+                        <h3 class="service-title">Social Media Marketing</h3>
+                        <p>Strategic social media campaigns to boost your online presence and engage with your target audience effectively.</p>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <%= image_tag("content-creation.jpeg", alt: "Translation Service") %>
+
+                        </div>
+                        <h3 class="service-title">Content Creation</h3>
+                        <p>Compelling content that resonates with your audience and drives engagement across all platforms.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+        
+
+        <section class="section" style="background-color: var(--light-gray);">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Latest Blog Posts</h2>
+                    <p class="section-subtitle">Insights and tips from our experts on translation, marketing, and content strategy.</p>
+                </div>
+                <div class="blog-grid">
+                    <div class="blog-card">
+                        <div class="blog-img">
+                            <%= image_tag("content-creation.jpeg", alt: "Translation Service") %>
+                        </div>
+                        <div class="blog-content">
+                            <div class="blog-date">April 20, 2025</div>
+                            <h3 class="blog-title">5 Tips for Effective Multilingual Marketing</h3>
+                            <p>Learn how to create marketing campaigns that resonate across different cultures and languages.</p>
+                            <a href="blog.html" class="read-more">Read More →</a>
+                        </div>
+                    </div>
+                    <div class="blog-card">
+                        <div class="blog-img">
+                            <%= image_tag("dreamstime_l_45807030-300x276-1.jpg", alt: "Translation Service") %>
+                        
+                        </div>
+                        <div class="blog-content">
+                            <div class="blog-date">April 15, 2025</div>
+                            <h3 class="blog-title">The Importance of Cultural Context in Translation</h3>
+                            <p>Why cultural nuance matters when translating content for international audiences.</p>
+                            <a href="blog.html" class="read-more">Read More →</a>
+                        </div>
+                    </div>
+                    <div class="blog-card">
+                        <div class="blog-img">
+                            <%= image_tag("Content Creation Strategies for 2025.png", alt: "Translation Service") %>
+                        </div>
+                        <div class="blog-content">
+                            <div class="blog-date">April 10, 2025</div>
+                            <h3 class="blog-title">Content Creation Strategies for 2025</h3>
+                            <p>Stay ahead of the curve with these emerging content creation trends and strategies.</p>
+                            <a href="blog.html" class="read-more">Read More →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Featured Books</h2>
+                    <p class="section-subtitle">Expand your knowledge with our curated collection of professional resources.</p>
+                </div>
+                <div class="books-grid">
+                    <div class="book-card">
+                        <div class="book-img">
+                           <%= image_tag("Cover.png", alt: "Translation Service") %>
+                        </div>
+                        <div class="book-content">
+                            <h3 class="book-title">The Art of Translation</h3>
+                            <div class="book-author">By John Smith</div>
+                            <p>A comprehensive guide to mastering the nuances of professional translation.</p>
+                            <div class="book-price">$24.99</div>
+                            <button class="buy-btn">Buy Now</button>
+                        </div>
+                    </div>
+                    
+                    <div class="book-card">
+                        <div class="book-img">
+                            <%= image_tag("Couverture.png", alt: "Translation Service") %>
+                        </div>
+                        <div class="book-content">
+                            <h3 class="book-title">Social Media Strategy Masterclass</h3>
+                            <div class="book-author">By Sarah Johnson</div>
+                            <p>Learn how to create effective social media campaigns that drive results.</p>
+                            <div class="book-price">$19.99</div>
+                            <button class="buy-btn">Buy Now</button>
+                        </div>
+                    </div>
+                    <div class="book-card">
+                        <div class="book-img">
+                            <%= image_tag("Cover.png", alt: "Translation Service") %>
+
+                        </div>
+                        <div class="book-content">
+                            <h3 class="book-title">Content That Converts</h3>
+                            <div class="book-author">By Michael Brown</div>
+                            <p>The ultimate guide to creating content that engages audiences and drives conversions.</p>
+                            <div class="book-price">$29.99</div>
+                            <button class="buy-btn">Buy Now</button>
+                        </div>
+                    </div>
+                    <div class="book-card">
+                        <div class="book-img">
+                            <%= image_tag("Cover.png", alt: "Translation Service") %>
+                        </div>
+                        <div class="book-content">
+                            <h3 class="book-title">Global Marketing Essentials</h3>
+                            <div class="book-author">By Emma Davis</div>
+                            <p>Everything you need to know about marketing your business globally.</p>
+                            <div class="book-price">$34.99</div>
+                            <button class="buy-btn">Buy Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <a href="index.html" class="logo">
+                    <%= image_tag("logo.jpeg", alt: "Translation Service") %>                    
+                </a>
+                    <div class="footer-logo">Savanna Lingo</div>
+                    <p class="footer-desc">Professional translation, social media marketing, and content creation services for businesses worldwide.</p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                    
+                </div>
+                <div>
+                    <h3 class="footer-heading">Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Translation Services</a></li>
+                        <li><a href="#">Social Media Marketing</a></li>
+                        <li><a href="#">Content Creation</a></li>
+                        <li><a href="books.html">Books</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="footer-heading">Company</h3>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="footer-heading">Contact</h3>
+                    <ul class="footer-links">
+                        <li><a href="mailto:info@savannalingo.com">info@savannalingo.com</a></li>
+                        <li>+250 789 171 755</li>
+                        <li>Remera/Gasabo, Kigali KG11 Ave</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Savanna Lingo. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        
+        // Close mobile menu when clicking a link
+        const navItems = document.querySelectorAll('.nav-links a');
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>

@@ -2,6 +2,8 @@
 import "@hotwired/turbo-rails"
 import "controllers"
 import "./posts"
+import "trix"
+import "@rails/actiontext"
 
 document.addEventListener('turbo:load', () => {
   const container = document.getElementById('content-blocks');
@@ -31,7 +33,3 @@ document.addEventListener('turbo:load', () => {
   });
 });
 
-
-
-import "trix"
-import "@rails/actiontext"
