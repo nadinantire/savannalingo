@@ -11,6 +11,7 @@
     <meta name="turbo-cache-control" content="no-cache">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    
 
     <%= yield :head %>
 
@@ -21,21 +22,17 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
     <%= javascript_importmap_tags %>
+    <%= stylesheet_link_tag 'application.css' %>
+    
     
   </head>
 
   <body>
-  <p class="notice"><%= notice %></p> 
-  <p class="alert"><%= alert %></p> 
-  <% if user_signed_in? %>
-  Logged in as: <%= current_user.name %> (Role: <%= current_user.user_role %>)
-<%= button_to 'Logout', destroy_user_session_path, method: :delete, data: { turbo: false } %>
-  <% else %>
-    <%= link_to 'Sign Up', new_user_registration_path %> |
-    <%= linkkkkkk8_to 'Log In', new_user_session_path %>
-  <% end %>
     <%= render 'pages/header' %>
-
+    <p class="notice"><%= notice %></p> 
+    <p class="alert"><%= alert %></p> 
     <%= yield %>
+    <!-- Footer Partial -->
+    <%= render 'pages/footer' %>
   </body>
 </html>

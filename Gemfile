@@ -43,6 +43,7 @@ group :development, :test do
 
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
+  gem 'dotenv-rails'
 end
 
 group :development do
@@ -60,4 +61,8 @@ gem "devise", "~> 4.9"
 gem 'rails_admin'
 gem "cssbundling-rails"
 gem 'sassc'
+gem 'cloudinary', '~> 1.21.0'
+gem 'activestorage-cloudinary-service'
+
+
 

@@ -8,6 +8,15 @@ class BooksController < ApplicationController
 
   # GET /books/1 or /books/1.json
   def show
+    @book = Book.find(params[:id])
+
+  if @book.rejected?
+    redirect_to books_path, alert: "This book has been removed."
+  elsif @book.pending? && @book.user != current_user
+    redirect_to books_path, alert: "This book is not published yet."
+  elsif @book.published? && !@book.paid?
+    redirect_to books_path, alert: "Please complete payment to access this book."
+  end
   end
 
   # GET /books/new
@@ -22,6 +31,7 @@ class BooksController < ApplicationController
   # POST /books or /books.json
   def create
     @book = Book.new(book_params)
+     @book.user = current_user
 
     respond_to do |format|
       if @book.save
@@ -65,6 +75,6 @@ class BooksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def book_params
-      params.require(:book).permit(:title, :writer, :description, :price, :user_id)
+      params.require(:book).permit(:title, :writer, :description, :price, :user_id, :pdf, :image,)
     end
 end

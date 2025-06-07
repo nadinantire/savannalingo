@@ -25,15 +25,18 @@
     <%= form.label :description, style: "display: block" %>
     <%= form.text_field :description %>
   </div>
+  <div>
+    <%= form.label :image, "Upload Book Cover", style: "display: block" %>
+    <%= form.file_field :image %>
+  </div>
+  <div>
+    <%= form.label :pdf, "Upload PDF", style: "display: block" %>
+    <%= form.file_field :pdf %>
+  </div>
 
   <div>
     <%= form.label :price, style: "display: block" %>
     <%= form.text_field :price %>
-  </div>
-
-  <div>
-    <%= form.label :user_id, style: "display: block" %>
-    <%= form.text_field :user_id %>
   </div>
 
   <div>

@@ -1,4 +1,8 @@
 <div id="<%= dom_id book %>">
+<% if book.image.attached? %>
+    <p><strong>Cover:</strong></p>
+    <%= image_tag book.image.variant(resize_to_limit: [300, 300]).processed %>
+  <% end %>
   <p>
     <strong>Title:</strong>
     <%= book.title %>
@@ -18,6 +22,46 @@
     <strong>Price:</strong>
     <%= book.price %>
   </p>
+  <% if book.pdf.attached? %>
+  <p>
+    <strong>PDF Preview:</strong>
+  </p>
+
+  <!-- PDF Inline Viewer -->
+  <iframe src="<%= url_for(book.pdf) %>" width="100%" height="600px"></iframe>
+
+  <!-- Download Button -->
+  <p>
+    <%= link_to "Download PDF", rails_blob_path(book.pdf, disposition: "attachment"), class: "button", style: "display: inline-block; padding: 8px 12px; background: #007bff; color: white; border-radius: 4px; text-decoration: none;" %>
+    <%= link_to "Download PDF", rails_blob_url(book.pdf, disposition: "attachment") %>
+    <%= link_to "Open PDF", book.pdf.url %>
+
+
+  </p>
+  <% else %>
+    <p>No PDF uploaded.</p>
+  <% end %>
+  <% if book.status == "published" && book.approval == "paid" %>
+  <p><strong>PDF Preview:</strong></p>
+  <iframe src="<%= url_for(book.pdf) %>" width="100%" height="600px"></iframe>
+
+  <p>
+    <%= link_to "Download PDF",
+                rails_blob_path(book.pdf, disposition: "attachment", filename: "#{book.title.parameterize}.pdf"),
+                target: "_blank",
+                rel: "noopener",
+                class: "button",
+                style: "padding: 8px 12px; background: #007bff; color: white; border-radius: 4px; text-decoration: none;" %>
+  </p>
+
+<% elsif book.status == "pending" && current_user == book.user %>
+  <p>This book is still under review.</p>
+
+<% else %>
+  <p>You do not have access to this book.</p>
+<% end %>
+
+
 
   <p>
     <strong>User:</strong>
