@@ -36,7 +36,8 @@ gem "image_processing", "~> 1.2"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
-  gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
+  # gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
+
 
   # Static analysis for security vulnerabilities [https://brakemanscanner.org/]
   gem "brakeman", require: false
@@ -49,6 +50,7 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
+
 end
 
 group :test do
@@ -63,6 +65,4 @@ gem "cssbundling-rails"
 gem 'sassc'
 gem 'cloudinary', '~> 1.21.0'
 gem 'activestorage-cloudinary-service'
-
-
-
+gem "net-protocol", "~> 0.2.2"

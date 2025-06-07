@@ -1,0 +1,18 @@
+current directory: /home/nadine/savannalingo/vendor/bundle/ruby/3.3.0/gems/erb-5.0.1/ext/erb/escape
+/home/nadine/.asdf/installs/ruby/3.3.3/bin/ruby extconf.rb
+creating Makefile
+
+current directory: /home/nadine/savannalingo/vendor/bundle/ruby/3.3.0/gems/erb-5.0.1/ext/erb/escape
+make DESTDIR\= sitearchdir\=./.gem.20250607-162728-4udgtg sitelibdir\=./.gem.20250607-162728-4udgtg clean
+
+current directory: /home/nadine/savannalingo/vendor/bundle/ruby/3.3.0/gems/erb-5.0.1/ext/erb/escape
+make DESTDIR\= sitearchdir\=./.gem.20250607-162728-4udgtg sitelibdir\=./.gem.20250607-162728-4udgtg
+compiling escape.c
+linking shared-object erb/escape.so
+
+current directory: /home/nadine/savannalingo/vendor/bundle/ruby/3.3.0/gems/erb-5.0.1/ext/erb/escape
+make DESTDIR\= sitearchdir\=./.gem.20250607-162728-4udgtg sitelibdir\=./.gem.20250607-162728-4udgtg install
+/usr/bin/install -c -m 0755 escape.so ./.gem.20250607-162728-4udgtg/erb
+
+current directory: /home/nadine/savannalingo/vendor/bundle/ruby/3.3.0/gems/erb-5.0.1/ext/erb/escape
+make DESTDIR\= sitearchdir\=./.gem.20250607-162728-4udgtg sitelibdir\=./.gem.20250607-162728-4udgtg clean
