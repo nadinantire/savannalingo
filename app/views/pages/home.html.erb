@@ -214,34 +214,46 @@ body {
 
 
 
-        /* Services Section */
+       /* Services Section */
         .section {
             padding: 5rem 0;
+            background-color: #f8f9fa;
         }
-        
+
+        .section-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .main-content {
+            min-width: 0; /* Prevents grid overflow */
+        }
+
         .section-header {
             text-align: center;
             margin-bottom: 3rem;
         }
-        
+
         .section-title {
             font-size: 2rem;
             color: var(--dark);
             margin-bottom: 1rem;
         }
-        
+
         .section-subtitle {
             color: var(--gray);
             max-width: 600px;
             margin: 0 auto;
         }
-        
+
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
         }
-        
+
         .service-card {
             background-color: white;
             border-radius: 10px;
@@ -249,40 +261,177 @@ body {
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
             transition: all 0.3s ease;
         }
-        
+
         .service-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
         }
-        
-        /* .service-icon {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        } */
 
         .service-icon {
-            /* height: 80px;
-            width: 80px; */
             margin: 0 auto 1rem auto;
             display: flex;
             align-items: center;
             justify-content: center;
             background-color: var(--light-gray);
-            /* border-radius: 50%; */
             overflow: hidden;
+            border-radius: 8px;
+            height: 200px;
         }
 
         .service-icon img {
             max-width: 100%;
             max-height: 100%;
-            object-fit: contain;
+            object-fit: cover;
         }
 
-        
         .service-title {
             font-size: 1.3rem;
             margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .service-card p {
+            text-align: center;
+            color: var(--gray);
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 2rem;
+        }
+
+        .sidebar-title {
+            font-size: 1.2rem;
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        /* Search Bar */
+        .search-container {
+            margin-bottom: 2rem;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            background-color: var(--light-gray);
+            border-radius: 25px;
+            padding: 0.5rem 1rem;
+            border: 1px solid #ddd;
+        }
+
+        .search-input {
+            flex: 1;
+            border: none;
+            background: transparent;
+            padding: 0.5rem;
+            font-size: 0.9rem;
+            outline: none;
+        }
+
+        .search-btn {
+            background: none;
+            border: none;
+            color: var(--gray);
+            cursor: pointer;
+            padding: 0.25rem;
+        }
+
+        /* Latest Posts */
+        .posts-section h3 {
+            font-size: 1rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .post-item {
+            display: flex;
+            gap: 0.75rem;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .post-item:last-child {
+            border-bottom: none;
+        }
+
+        .post-image {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .post-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .post-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .post-title {
+            font-size: 0.85rem;
+            color: var(--dark);
+            margin-bottom: 0.25rem;
+            line-height: 1.3;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .post-time {
+            font-size: 0.75rem;
+            color: var(--gray);
+        }
+            .read-more {
+            font-size: 0.75rem;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .read-more:hover {
+            color: #0056b3;
+            text-decoration: underline;
+        }
+
+        .read-more-icon {
+            font-size: 0.7rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .section-wrapper {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .sidebar {
+                order: -1;
+                position: static;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
         }
         
         /* Blog Preview Section */
@@ -733,48 +882,126 @@ body {
             slider.addEventListener('mouseover', () => clearInterval(slideInterval));
             slider.addEventListener('mouseout', () => slideInterval = setInterval(nextSlide, 5000));
         </script>
-        
-        
-
-        
-
-
-        <section id="services" class="section">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title">Our Services</h2>
-                    <p class="section-subtitle">Comprehensive solutions to help your business thrive in the global marketplace.</p>
-                </div>
-                <div class="services-grid">
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <%= image_tag("translation.jpeg", alt: "Translation Service") %>
-
-                        </div>
-                        <h3 class="service-title">Translation Services</h3>
-                        <p>Professional translation services in multiple languages. We ensure accuracy and cultural nuance in every project.</p>
+       <section id="services" class="section">
+        <div class="container">
+            <div class="section-wrapper">
+                <!-- Main Content -->
+                <div class="main-content">
+                    <div class="section-header">
+                        <h2 class="section-title">Our Services</h2>
+                        <p class="section-subtitle">Comprehensive solutions to help your business thrive in the global marketplace.</p>
                     </div>
-                    
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <%= image_tag("social-media.jpeg", alt: "Translation Service") %>
+                    <div class="services-grid">
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=300&fit=crop" alt="Translation Service">
+                            </div>
+                            <h3 class="service-title">Translation Services</h3>
+                            <p>Professional translation services in multiple languages. We ensure accuracy and cultural nuance in every project.</p>
                         </div>
-                        <h3 class="service-title">Social Media Marketing</h3>
-                        <p>Strategic social media campaigns to boost your online presence and engage with your target audience effectively.</p>
-                    </div>
-                    
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <%= image_tag("content-creation.jpeg", alt: "Translation Service") %>
-
+                        
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <img src="https://images.unsplash.com/photo-1611926653458-09294b3142bf?w=400&h=300&fit=crop" alt="Social Media Marketing">
+                            </div>
+                            <h3 class="service-title">Social Media Marketing</h3>
+                            <p>Strategic social media campaigns to boost your online presence and engage with your target audience effectively.</p>
                         </div>
-                        <h3 class="service-title">Content Creation</h3>
-                        <p>Compelling content that resonates with your audience and drives engagement across all platforms.</p>
+                        
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop" alt="Content Creation">
+                            </div>
+                            <h3 class="service-title">Content Creation</h3>
+                            <p>Compelling content that resonates with your audience and drives engagement across all platforms.</p>
+                        </div>
                     </div>
                 </div>
-                
+
+                <!-- Sidebar -->
+                <div class="sidebar">
+                    <h2 class="sidebar-title">Live Results Search</h2>
+                    
+                    <!-- Search Bar -->
+                    <div class="search-container">
+                        <div class="search-box">
+                            <input type="text" class="search-input" placeholder="Search...">
+                            <button class="search-btn">🔍</button>
+                        </div>
+                    </div>
+
+                    <!-- Latest Posts -->
+                    <div class="posts-section">
+                        <h3>Posts</h3>
+                        
+                        <div class="post-item">
+                            <div class="post-image">
+                                <img src="https://images.unsplash.com/photo-1518717758536-85ae29035b6d?w=200&h=200&fit=crop" alt="Post">
+                            </div>
+                            <div class="post-content">
+                                <div class="post-title">Tempor Nec Feugiat Nibh/verum Fusce Platea Dictumst</div>
+                                <div class="post-meta">
+                                    <div class="post-time">January 27, 2020</div>
+                                    <a href="#" class="read-more">
+                                        Read More
+                                        <span class="read-more-icon">→</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="post-item">
+                            <div class="post-image">
+                                <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=200&h=200&fit=crop" alt="Post">
+                            </div>
+                            <div class="post-content">
+                                <div class="post-title">Egestas Egestas Fringilla Phasellus Faucibus Scelerisque</div>
+                                <div class="post-meta">
+                                    <div class="post-time">January 27, 2020</div>
+                                    <a href="#" class="read-more">
+                                        Read More
+                                        <span class="read-more-icon">→</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="post-item">
+                            <div class="post-image">
+                                <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?w=200&h=200&fit=crop" alt="Post">
+                            </div>
+                            <div class="post-content">
+                                <div class="post-title">Enim Facilisis Gravida Neque Convallis Cras Semper Auctor</div>
+                                <div class="post-meta">
+                                    <div class="post-time">January 27, 2020</div>
+                                    <a href="#" class="read-more">
+                                        Read More
+                                        <span class="read-more-icon">→</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="post-item">
+                            <div class="post-image">
+                                <img src="https://images.unsplash.com/photo-1542435503-956c469947f6?w=200&h=200&fit=crop" alt="Post">
+                            </div>
+                            <div class="post-content">
+                                <div class="post-title">Fermentum Dui Faucibus Bramare Quam Viverra Orci</div>
+                                <div class="post-meta">
+                                    <div class="post-time">January 28, 2020</div>
+                                    <a href="#" class="read-more">
+                                        Read More
+                                        <span class="read-more-icon">→</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </section>
+        </div>
+    </section>
         
 
         <section class="section" style="background-color: var(--light-gray);">

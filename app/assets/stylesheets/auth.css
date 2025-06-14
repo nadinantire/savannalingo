@@ -1,0 +1,424 @@
+/* ========================================
+   UNIFIED AUTHENTICATION STYLES
+   For Sign Up, Login, and Forgot Password Forms
+   ======================================== */
+
+/* ========================================
+   SHARED BASE STYLES
+   ======================================== */
+
+/* Container styles - shared across all auth forms */
+.signup-container,
+.login-container,
+.forgot-password-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Card styles - shared across all auth forms */
+.signup-card,
+.login-card,
+.forgot-password-card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+  padding: 28px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.signup-card {
+  max-width: 420px;
+}
+
+.login-card,
+.forgot-password-card {
+  max-width: 400px;
+}
+
+/* Gradient accent line at top of cards */
+.signup-card::before,
+.login-card::before,
+.forgot-password-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #667eea, #764ba2);
+}
+
+/* ========================================
+   HEADER STYLES
+   ======================================== */
+
+/* Header container */
+.signup-header,
+.login-header,
+.forgot-password-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+/* Icon wrapper for login and forgot password */
+.icon-wrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 50%;
+  margin-bottom: 16px;
+}
+
+.user-icon,
+.lock-icon {
+  width: 28px;
+  height: 28px;
+  color: white;
+}
+
+/* Title styles */
+.signup-title,
+.login-title,
+.forgot-password-title {
+  color: #2d3748;
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0 0 6px 0;
+  letter-spacing: -0.5px;
+}
+
+/* Subtitle styles */
+.signup-subtitle,
+.login-subtitle,
+.forgot-password-subtitle {
+  color: #718096;
+  font-size: 14px;
+  margin: 0;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+/* ========================================
+   FORM STYLES
+   ======================================== */
+
+/* Form container */
+.signup-form,
+.login-form,
+.forgot-password-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Form group */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Form labels */
+.form-label {
+  color: #2d3748;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.025em;
+}
+
+/* Password hint */
+.password-hint {
+  color: #718096;
+  font-size: 12px;
+  font-weight: 400;
+  margin-left: 4px;
+}
+
+/* Form inputs */
+.form-input {
+  padding: 12px 14px;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 15px;
+  transition: all 0.2s ease;
+  background: #f7fafc;
+  color: #2d3748;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #667eea;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  transform: translateY(-1px);
+}
+
+.form-input::placeholder {
+  color: #a0aec0;
+}
+
+/* ========================================
+   CHECKBOX STYLES (LOGIN FORM)
+   ======================================== */
+
+.checkbox-group {
+  margin: 4px 0;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+.checkbox-input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.checkbox-custom {
+  position: relative;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #e2e8f0;
+  border-radius: 4px;
+  margin-right: 10px;
+  transition: all 0.2s ease;
+  background: #f7fafc;
+}
+
+.checkbox-input:checked + .checkbox-custom {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-color: #667eea;
+}
+
+.checkbox-input:checked + .checkbox-custom::after {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 2px;
+  width: 4px;
+  height: 8px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.checkbox-text {
+  color: #2d3748;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* ========================================
+   BUTTON STYLES
+   ======================================== */
+
+.form-actions {
+  margin-top: 8px;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: none;
+  letter-spacing: 0.025em;
+}
+
+.submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(102, 126, 234, 0.4);
+}
+
+.submit-btn:active {
+  transform: translateY(0);
+}
+
+.submit-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ========================================
+   FOOTER STYLES
+   ======================================== */
+
+.signup-footer,
+.login-footer,
+.forgot-password-footer {
+  margin-top: 24px;
+  text-align: center;
+}
+
+.divider {
+  position: relative;
+  margin-bottom: 16px;
+}
+
+.divider::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: #e2e8f0;
+  z-index: 1;
+}
+
+.divider-text {
+  position: relative;
+  background: white;
+  padding: 0 16px;
+  color: #718096;
+  font-size: 14px;
+  font-weight: 500;
+  z-index: 2;
+}
+
+.signup-footer a,
+.login-footer a,
+.forgot-password-footer a {
+  color: #667eea;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.signup-footer a:hover,
+.login-footer a:hover,
+.forgot-password-footer a:hover {
+  color: #764ba2;
+  text-decoration: underline;
+}
+
+/* ========================================
+   MESSAGE STYLES
+   ======================================== */
+
+/* Error messages */
+.alert {
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  background: #fed7d7;
+  border: 1px solid #feb2b2;
+  color: #c53030;
+  font-size: 14px;
+}
+
+/* Success messages */
+.notice {
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  background: #c6f6d5;
+  border: 1px solid #9ae6b4;
+  color: #2f855a;
+  font-size: 14px;
+}
+
+/* ========================================
+   ACCESSIBILITY STYLES
+   ======================================== */
+
+.form-input:focus-visible,
+.submit-btn:focus-visible,
+.checkbox-input:focus-visible + .checkbox-custom {
+  outline: 2px solid #667eea;
+  outline-offset: 2px;
+}
+
+/* ========================================
+   RESPONSIVE STYLES
+   ======================================== */
+
+@media (max-width: 480px) {
+  .signup-container,
+  .login-container,
+  .forgot-password-container {
+    padding: 16px;
+  }
+  
+  .signup-card,
+  .login-card,
+  .forgot-password-card {
+    padding: 24px;
+  }
+  
+  .signup-title,
+  .login-title,
+  .forgot-password-title {
+    font-size: 22px;
+  }
+  
+  .icon-wrapper {
+    width: 56px;
+    height: 56px;
+  }
+  
+  .user-icon,
+  .lock-icon {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .form-input {
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+}
+  .page-container {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 30px;
+    background-color: #fdfdfd;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
+
+  .page-title {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+  }
+
+  .action-links {
+    text-align: center;
+    margin-top: 30px;
+  }
+
+  .action-links a {
+    margin: 0 10px;
+    padding: 10px 16px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+  }
+
+  .action-links a:hover {
+    background-color: #0056b3;
+  }

@@ -1,16 +1,47 @@
-<p style="color: green"><%= notice %></p>
-
 <% content_for :title, "Books" %>
 
-<h1>Books</h1>
+<h1 style="text-align: center; margin-bottom: 30px;">Books</h1>
 
-<div id="books">
+<%# Notice Alert %>
+<% if notice %>
+  <p style="color: #155724; background-color: #d4edda; border: 1px solid #c3e6cb; padding: 10px; border-radius: 5px; margin-bottom: 20px;">
+    <%= notice %>
+  </p>
+<% end %>
+
+<%# Books Grid %>
+<div id="books" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+
   <% @books.each do |book| %>
-    <%= render book %>
-    <p>
-      <%= link_to "Show this book", book %>
-    </p>
-  <% end %>
+    <div style="border: 1px solid #ccc; border-radius: 10px; padding: 15px; box-shadow: 2px 2px 6px rgba(0,0,0,0.1); background: #fff;">
+
+      <% if book.image.attached? %>
+        <div style="text-align: center; margin-bottom: 20px;">
+          <p style="font-weight: bold; margin-bottom: 10px;">Cover:</p>
+          <%= image_tag book.image.variant(resize_to_limit: [300, 300]), style: "max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);" %>
+        </div>
+      <% end %>
+
+      <div style="margin-bottom: 10px;"><strong>Title:</strong> <%= book.title %></div>
+      <div style="margin-bottom: 10px;"><strong>Writer:</strong> <%= book.writer %></div>
+      <div style="margin-bottom: 10px;">
+  <strong>Description:</strong> 
+  <%= truncate(book.description, length: 100, separator: ' ', omission: '...') %>
 </div>
 
-<%= link_to "New book", new_book_path %>
+      <div style="margin-bottom: 10px;"><strong>Price:</strong> $<%= book.price %></div>
+
+      <p style="margin-top: 10px;">
+        <%= link_to "📖 Show this book", book, style: "display: inline-block; padding: 8px 12px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;" %>
+      </p>
+
+    </div>
+  <% end %>
+
+</div>
+
+<%# New Book Button %>
+<div style="text-align: center; margin-top: 40px;">
+  <%= link_to "➕ New book", new_book_path,
+      style: "padding: 12px 20px; background-color: #28a745; color: white; text-decoration: none; font-weight: bold; border-radius: 6px;" %>
+</div>

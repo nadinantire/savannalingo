@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: savanalingo         # change if your Render service has a different name
+    env: ruby
+    buildCommand: bundle install
+    startCommand: bundle exec puma -C config/puma.rb
+    migrationsCommand: bundle exec rails db:migrate RAILS_ENV=production
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: savanalingo-db  # change to the actual name of your Render PostgreSQL instance
+          property: connectionString

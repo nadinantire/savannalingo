@@ -1,3 +1,56 @@
+<!-- Add this <style> block near the top of your view or partial -->
+<style>
+  .content-block {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #fefefe;
+    margin-bottom: 25px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  }
+
+  .content-block label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #333;
+  }
+
+  .content-block select,
+  .content-block textarea,
+  .content-block input[type="file"],
+  .content-block input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 18px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    background-color: #fff;
+  }
+
+  .content-block textarea {
+    min-height: 120px;
+    resize: vertical;
+  }
+
+  .remove-content-block {
+    display: inline-block;
+    background-color: #dc3545;
+    color: white;
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background-color 0.2s;
+  }
+
+  .remove-content-block:hover {
+    background-color: #c82333;
+  }
+</style>
+
+<!-- Your form fields inside the styled content block -->
 <div class="content-block">
   <%= f.label :content_type %>
   <%= f.select :content_type, PostContentBlock.content_types.keys %>
@@ -10,5 +63,5 @@
 
   <%= f.hidden_field :position %>
 
-  <%= link_to "Remove", "#", class: "remove-content-block" %>
+  <%= link_to "🗑️ Remove", "#", class: "remove-content-block" %>
 </div>

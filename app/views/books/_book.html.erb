@@ -1,71 +1,69 @@
-<div id="<%= dom_id book %>">
-<% if book.image.attached? %>
-    <p><strong>Cover:</strong></p>
-    <%= image_tag book.image.variant(resize_to_limit: [300, 300]).processed %>
+<div id="<%= dom_id book %>" style="max-width: 800px; margin: 40px auto; padding: 20px; border: 1px solid #ccc; border-radius: 12px; background: #fff; box-shadow: 0 4px 8px rgba(0,0,0,0.05); font-family: Arial, sans-serif;">
+
+  <% if book.image.attached? %>
+    <div style="text-align: center; margin-bottom: 20px;">
+      <p style="font-weight: bold; margin-bottom: 10px;">Cover:</p>
+      <%= image_tag book.image.variant(resize_to_limit: [300, 300]), style: "max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);" %>
+    </div>
   <% end %>
-  <p>
-    <strong>Title:</strong>
-    <%= book.title %>
-  </p>
 
-  <p>
-    <strong>Writer:</strong>
-    <%= book.writer %>
-  </p>
+  <div style="margin-bottom: 10px;"><strong>Title:</strong> <%= book.title %></div>
+  <div style="margin-bottom: 10px;"><strong>Writer:</strong> <%= book.writer %></div>
+  <div style="margin-bottom: 10px;"><strong>Description:</strong> <%= book.description %></div>
+  <div style="margin-bottom: 10px;"><strong>Price:</strong> $<%= book.price %></div>
 
-  <p>
-    <strong>Description:</strong>
-    <%= book.description %>
-  </p>
+  <!-- Star Rating (static for now) -->
+  <div style="margin-bottom: 15px;">
+    <strong>Rating:</strong>
+    <span style="color: gold;">★★★★★</span> <!-- Replace with dynamic rating if needed -->
+  </div>
 
-  <p>
-    <strong>Price:</strong>
-    <%= book.price %>
-  </p>
+  <!-- PDF section -->
   <% if book.pdf.attached? %>
-  <p>
-    <strong>PDF Preview:</strong>
-  </p>
+    <div style="margin-top: 25px;">
+      <p style="font-weight: bold;">PDF Preview:</p>
+      <iframe src="<%= url_for(book.pdf) %>" width="100%" height="600px" style="border: 1px solid #ccc; border-radius: 8px;"></iframe>
 
-  <!-- PDF Inline Viewer -->
-  <iframe src="<%= url_for(book.pdf) %>" width="100%" height="600px"></iframe>
-
-  <!-- Download Button -->
-  <p>
-    <%= link_to "Download PDF", rails_blob_path(book.pdf, disposition: "attachment"), class: "button", style: "display: inline-block; padding: 8px 12px; background: #007bff; color: white; border-radius: 4px; text-decoration: none;" %>
-    <%= link_to "Download PDF", rails_blob_url(book.pdf, disposition: "attachment") %>
-    <%= link_to "Open PDF", book.pdf.url %>
-
-
-  </p>
+      <p style="margin-top: 10px;">
+        <%= link_to "Download PDF", rails_blob_path(book.pdf, disposition: "attachment"),
+          style: "display: inline-block; padding: 10px 16px; background-color: #007bff; color: white; border-radius: 6px; text-decoration: none;" %>
+      </p>
+    </div>
   <% else %>
-    <p>No PDF uploaded.</p>
+    <p style="color: red; margin-top: 10px;">No PDF uploaded.</p>
   <% end %>
+
   <% if book.status == "published" && book.approval == "paid" %>
-  <p><strong>PDF Preview:</strong></p>
-  <iframe src="<%= url_for(book.pdf) %>" width="100%" height="600px"></iframe>
+    <div style="margin-top: 25px;">
+      <p style="font-weight: bold;">PDF Preview:</p>
+      <iframe src="<%= url_for(book.pdf) %>" width="100%" height="600px" style="border: 1px solid #ccc; border-radius: 8px;"></iframe>
 
-  <p>
-    <%= link_to "Download PDF",
-                rails_blob_path(book.pdf, disposition: "attachment", filename: "#{book.title.parameterize}.pdf"),
-                target: "_blank",
-                rel: "noopener",
-                class: "button",
-                style: "padding: 8px 12px; background: #007bff; color: white; border-radius: 4px; text-decoration: none;" %>
-  </p>
+      <p style="margin-top: 10px;">
+        <%= link_to "Download PDF",
+                    rails_blob_path(book.pdf, disposition: "attachment", filename: "#{book.title.parameterize}.pdf"),
+                    target: "_blank",
+                    rel: "noopener",
+                    style: "display: inline-block; padding: 10px 16px; background-color: #28a745; color: white; border-radius: 6px; text-decoration: none;" %>
+      </p>
+    </div>
+  <% elsif book.status == "pending" && current_user == book.user %>
+    <p style="margin-top: 15px; color: orange;">This book is still under review.</p>
+  <% else %>
+    <p style="margin-top: 15px; color: gray;">You do not have access to this book.</p>
+  <% end %>
 
-<% elsif book.status == "pending" && current_user == book.user %>
-  <p>This book is still under review.</p>
+  <!-- Buttons: Edit / Delete -->
+  <% if current_user == book.user %>
+    <div style="margin-top: 25px;">
+      <%= link_to 'Edit', edit_book_path(book), style: "padding: 8px 12px; background: #ffc107; color: black; border-radius: 6px; text-decoration: none; margin-right: 10px;" %>
+      <%= link_to 'Delete', book, method: :delete, data: { confirm: 'Are you sure?' }, style: "padding: 8px 12px; background: #dc3545; color: white; border-radius: 6px; text-decoration: none;" %>
+    </div>
+  <% end %>
 
-<% else %>
-  <p>You do not have access to this book.</p>
-<% end %>
-
-
-
-  <p>
-    <strong>User:</strong>
-    <%= book.user_id %>
-  </p>
+  <!-- User & Time Info -->
+  <div style="margin-top: 25px; font-size: 13px; color: #777;">
+    <p><strong>Uploaded by:</strong> <%= book.user.email %></p>
+    <p><strong>Uploaded:</strong> <%= time_ago_in_words(book.created_at) %> ago</p>
+  </div>
 
 </div>
