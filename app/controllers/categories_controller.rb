@@ -2,6 +2,12 @@ class CategoriesController < ApplicationController
   before_action :set_category, only: %i[ show edit update destroy ]
   before_action :authenticate_user!
 
+def user_posts
+  @category = Category.find(params[:id])
+  @posts = @category.posts.where(user: current_user)
+
+  # Optionally render to a view like: views/categories/user_posts.html.erb
+end
 
   # GET /categories or /categories.json
   def index

@@ -232,22 +232,34 @@ nav {
             
             <div class="nav-center">
                 <ul class="nav-links">
-                    <li><a href="index.html" class="active">Home</a></li>
+                    <%= link_to 'Home', root_path, class: "active" %>
                     <li><%= link_to 'About', about_path %></li>
-                    <li><a href="blog.html">Blog</a></li>
-                    <li><a href="books.html">Books</a></li>
-                </ul>
+                    <li><%= link_to 'Posts', stories_path %></li>
+                    <li><%= link_to 'Books', books_path %></li>
                 
-                <div class="auth-buttons">
-                    <% if user_signed_in? %>
-                        <!-- User is logged in - show logout button -->
-                        <%= button_to 'Logout', destroy_user_session_path, method: :delete, data: { turbo: false }, class: 'logout-btn' %>
-                    <% else %>
-                        <!-- User is not logged in - show login and register buttons -->
-                        <%= link_to "Login", new_user_session_path, class: "auth-btn secondary" %>
-                        <%= link_to "Register", new_user_registration_path, class: "auth-btn" %>
-                    <% end %>
-                </div>
+                
+                <div class="auth-buttons"> 
+    <% if user_signed_in? %> 
+        <!-- User is logged in - show role-based navigation and logout --> 
+        <div class="user-nav">
+            <% if current_user.user_role == 'admin' %>
+                <!-- Admin users get access to everything -->
+                <%= link_to "Posts", posts_path, class: "nav-btn" %>
+                <%= link_to "Admin Dashboard", rails_admin_path, class: "nav-btn admin" %>
+            <% elsif current_user.user_role == 'blogger' %>
+                <!-- Blogger users get access to posts only -->
+                <%= link_to "My Posts", posts_path %>
+            <% end %>
+        </div>
+        </ul>
+        <%= button_to 'Logout', destroy_user_session_path, method: :delete, data: { turbo: false }, class: 'logout-btn' %> 
+    <% else %> 
+        <!-- User is not logged in - show login and register buttons --> 
+        <%= link_to "Login", new_user_session_path, class: "auth-btn secondary" %> 
+        <%= link_to "Register", new_user_registration_path, class: "auth-btn" %> 
+    <% end %> 
+</div>
+
             </div>
         </nav>
     </div>

@@ -1,14 +1,16 @@
 class Post < ApplicationRecord
   belongs_to :user
+  belongs_to :category
 
-  has_many_attached :images  # for multiple image uploads
-  has_many :post_content_blocks, -> { order(:position) }, dependent: :destroy
-  accepts_nested_attributes_for :post_content_blocks, allow_destroy: true
+  has_many_attached :images
   has_rich_text :body
+   enum status: { draft: 0, published: 1, archived: 2 }
 
 
 
-  validates :title, :body, :status, presence: true
+  validates :title, :status, presence: true
+  scope :published, -> { where(status: 'published') }
+  scope :recent, -> { order(published_at: :desc) }
   before_save :generate_slug
 
 def generate_slug

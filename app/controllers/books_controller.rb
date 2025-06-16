@@ -3,21 +3,35 @@ class BooksController < ApplicationController
 
   # GET /books or /books.json
   def index
-    @books = Book.all
+  if current_user&.publisher?
+    @books = Book.includes(:user, :category_book)
+                 .where("status = ? OR (status = ? AND user_id = ?)",
+                        Book.statuses[:published], Book.statuses[:pending], current_user.id)
+                 .order(created_at: :desc)
+  else
+    @books = Book.includes(:user, :category_book)
+                 .where(status: Book.statuses[:published])  # <= make sure this is integer value (1)
+                 .order(created_at: :desc)
   end
+
+  @recent_books = Book.where(status: "published").order(created_at: :desc).limit(4)
+  @recent_posts = Post.where(status: "published").order(published_at: :desc).limit(4)
+end
 
   # GET /books/1 or /books/1.json
   def show
-    @book = Book.find(params[:id])
+  @book = Book.find(params[:id])
 
   if @book.rejected?
     redirect_to books_path, alert: "This book has been removed."
   elsif @book.pending? && @book.user != current_user
     redirect_to books_path, alert: "This book is not published yet."
-  elsif @book.published? && !@book.paid?
-    redirect_to books_path, alert: "Please complete payment to access this book."
+  elsif @book.published?
+    if @book.not_yet_paid? && (!current_user || !current_user.publisher?)
+      redirect_to books_path, alert: "Please complete payment to access this book by calling this number +250789171755 ."
+    end
   end
-  end
+end
 
   # GET /books/new
   def new
@@ -75,6 +89,6 @@ class BooksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def book_params
-      params.require(:book).permit(:title, :writer, :description, :price, :user_id, :pdf, :image,)
+      params.require(:book).permit(:title, :writer, :description, :price, :user_id, :category_book_id, :pdf, :image,)
     end
 end

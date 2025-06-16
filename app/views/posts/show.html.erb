@@ -51,9 +51,3 @@
 <% end %>
 
 <%= render @post %>
-
-<div class="post-actions">
-  <%= link_to "✏️ Edit this post", edit_post_path(@post), class: "btn" %>
-  <%= link_to "📋 Back to posts", posts_path, class: "btn" %>
-  <%= button_to "🗑️ Destroy this post", @post, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
-</div>

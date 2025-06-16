@@ -57,6 +57,4 @@ gem "devise", "~> 4.9"
 gem 'rails_admin'
 gem "cssbundling-rails"
 gem 'sassc'
-gem 'cloudinary', '~> 1.21.0'
-gem 'activestorage-cloudinary-service'
 gem "net-protocol", "~> 0.2.2"

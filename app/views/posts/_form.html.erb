@@ -100,15 +100,14 @@
     <%= form.label :title %>
     <%= form.text_field :title %>
   </div>
+  <div class="form-group">
+    <%= form.label :category_id, "Select Category" %>
+    <%= form.collection_select :category_id, Category.all, :id, :name, prompt: "Choose a category" %>
+  </div>
 
   <div class="form-group">
     <%= form.label :body %>
     <%= form.rich_text_area :body %>
-  </div>
-
-  <div class="form-group">
-    <%= form.label :status %>
-    <%= form.text_field :status %>
   </div>
 
   <div class="form-group">
@@ -123,18 +122,6 @@
 
   <%= form.hidden_field :user_id, value: current_user.id %>
 
-  <div class="content-blocks-wrapper" id="content-blocks">
-    <%= form.fields_for :post_content_blocks do |block_form| %>
-      <%= render "post_content_block_fields", f: block_form %>
-    <% end %>
-  </div>
-
-  <!-- Hidden Template for JS duplication -->
-  <div id="post_content_block_template" style="display: none;">
-    <%= form.fields_for :post_content_blocks, PostContentBlock.new, child_index: "new_post_content_blocks" do |f| %>
-      <%= render "post_content_block_fields", f: f %>
-    <% end %>
-  </div>
 
   <button type="button" class="add-content-block">➕ Add Content Block</button>
 

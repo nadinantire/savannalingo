@@ -1,47 +1,130 @@
-<% content_for :title, "Books" %>
+<% content_for :title, "Our Books" %>
 
-<h1 style="text-align: center; margin-bottom: 30px;">Books</h1>
-
-<%# Notice Alert %>
-<% if notice %>
-  <p style="color: #155724; background-color: #d4edda; border: 1px solid #c3e6cb; padding: 10px; border-radius: 5px; margin-bottom: 20px;">
-    <%= notice %>
-  </p>
-<% end %>
-
-<%# Books Grid %>
-<div id="books" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
-
-  <% @books.each do |book| %>
-    <div style="border: 1px solid #ccc; border-radius: 10px; padding: 15px; box-shadow: 2px 2px 6px rgba(0,0,0,0.1); background: #fff;">
-
-      <% if book.image.attached? %>
-        <div style="text-align: center; margin-bottom: 20px;">
-          <p style="font-weight: bold; margin-bottom: 10px;">Cover:</p>
-          <%= image_tag book.image.variant(resize_to_limit: [300, 300]), style: "max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);" %>
-        </div>
-      <% end %>
-
-      <div style="margin-bottom: 10px;"><strong>Title:</strong> <%= book.title %></div>
-      <div style="margin-bottom: 10px;"><strong>Writer:</strong> <%= book.writer %></div>
-      <div style="margin-bottom: 10px;">
-  <strong>Description:</strong> 
-  <%= truncate(book.description, length: 100, separator: ' ', omission: '...') %>
-</div>
-
-      <div style="margin-bottom: 10px;"><strong>Price:</strong> $<%= book.price %></div>
-
-      <p style="margin-top: 10px;">
-        <%= link_to "📖 Show this book", book, style: "display: inline-block; padding: 8px 12px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;" %>
-      </p>
-
+<div class="stories-container">
+  <!-- Header Section -->
+  <div class="stories-header-section">
+    <div class="stories-header-content">
+      <h1 class="stories-page-title">
+        <span class="stories-heart-icon">📚</span>
+        Our Books
+      </h1>
+      <div class="stories-search-container">
+        <%= form_with url: books_path, method: :get, local: true, class: "stories-search-box" do |f| %>
+          <%= f.text_field :search, placeholder: "Search for a book...", class: "stories-search-input", value: params[:search] %>
+          <%= f.submit "🔍", class: "stories-search-btn" %>
+        <% end %>
+      </div>
     </div>
-  <% end %>
+  </div>
 
-</div>
+  <!-- Main Layout -->
+  <div class="stories-main-layout">
+    <!-- Books Grid -->
+    <div class="stories-posts-content">
+      <div class="stories-posts-grid">
+        <% if @books.present? %>
+          <% @books.each do |book| %>
+            <article class="stories-post-card">
+              <div class="stories-post-image">
+                <% if book.image.attached? %>
+                  <%= image_tag book.image.variant(resize_to_limit: [400, 250]), alt: book.title %>
+                <% else %>
+                  <span>No Image</span>
+                <% end %>
+                <span class="stories-post-category">
+                  <%= book.category_book.name %>
+                </span>
+              </div>
+              <div class="stories-post-content">
+                <h2 class="stories-post-title"><%= book.title %></h2>
+                <div class="stories-post-meta">
+                  <span class="stories-post-author">BY <%= book.user.name.upcase rescue book.user.email.split('@').first.upcase %></span>
+                  <span class="stories-post-date"><%= book.created_at.strftime("%b %d, %Y") %></span>
+                </div>
+                <div class="stories-post-excerpt">
+                  <%= truncate(book.description, length: 150) %>
+                </div>
+                <%= link_to "READ MORE", book_path(book), class: "stories-read-more-btn" %>
+              </div>
+            </article>
+          <% end %>
+        <% else %>
+          <div style="grid-column: 1/-1; text-align: center; padding: 2rem; color: var(--gray);">
+            <h3>No books found</h3>
+            <p>There are currently no published books to display.</p>
+          </div>
+        <% end %>
+      </div>
+    </div>
 
-<%# New Book Button %>
-<div style="text-align: center; margin-top: 40px;">
-  <%= link_to "➕ New book", new_book_path,
-      style: "padding: 12px 20px; background-color: #28a745; color: white; text-decoration: none; font-weight: bold; border-radius: 6px;" %>
+    <!-- Sidebar -->
+    <aside class="stories-sidebar">
+      <!-- Recent Posts -->
+      <div class="stories-sidebar-section">
+        <h3 class="stories-sidebar-title">Recent Posts</h3>
+        <% if @recent_posts.present? %>
+          <% @recent_posts.each do |post| %>
+            <div class="stories-popular-post">
+              <div class="stories-popular-post-image">
+                <% if post.respond_to?(:images) && post.images.present? %>
+                  <%= image_tag url_for(post.images.first), alt: post.title if post.images.attached? %>
+                <% else %>
+                  <span>No Image</span>
+                <% end %>
+              </div>
+              <div class="stories-popular-post-content">
+                <div class="stories-popular-post-date"><%= post.published_at&.strftime("%b %d, %Y") || post.created_at.strftime("%b %d, %Y") %></div>
+                <div class="stories-popular-post-title">
+                  <%= link_to truncate(post.title, length: 50), post_path(post), style: "text-decoration: none; color: inherit;" %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        <% else %>
+          <p style="color: var(--gray); font-size: 0.9rem;">No recent posts available.</p>
+        <% end %>
+      </div>
+
+      <!-- Recent Books -->
+      <div class="stories-sidebar-section">
+        <h3 class="stories-sidebar-title">Recent Books</h3>
+        <% if @recent_books.present? %>
+          <% @recent_books.each do |book| %>
+            <div class="stories-recent-post">
+              <div class="stories-recent-post-icon">
+                <% if book.image.attached? %>
+                  <%= image_tag book.image.variant(resize_to_limit: [60, 60]), alt: book.title %>
+                <% else %>
+                  <span>📘</span>
+                <% end %>
+              </div>
+              <div class="stories-recent-post-content">
+                <div class="stories-recent-post-title">
+                  <%= link_to truncate(book.title, length: 40), book_path(book), style: "text-decoration: none; color: inherit;" %>
+                </div>
+                <div class="stories-recent-post-date"><%= book.created_at.strftime("%b %d, %Y") %></div>
+              </div>
+            </div>
+          <% end %>
+        <% else %>
+          <p style="color: var(--gray); font-size: 0.9rem;">No recent books available.</p>
+        <% end %>
+      </div>
+
+      <!-- Book Categories -->
+      <div class="stories-sidebar-section">
+        <h3 class="stories-sidebar-title">Book Categories</h3>
+        <div class="stories-category-item">
+          <span class="stories-category-name">All</span>
+          <span class="stories-category-count">(<%= @books.count %>)</span>
+        </div>
+        <% CategoryBook.all.each do |category| %>
+          <div class="stories-category-item">
+            <span class="stories-category-name"><%= category.name %></span>
+            <span class="stories-category-count">(<%= category.books.count %>)</span>
+          </div>
+        <% end %>
+      </div>
+    </aside>
+  </div>
 </div>

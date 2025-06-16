@@ -1,13 +1,31 @@
 RailsAdmin.config do |config|
   config.asset_source = :importmap
+  
+  # Change the admin panel name
+  config.main_app_name = ["SavannaLingo", "Admin"]
+  
+  # Add logout link in navigation
+  config.navigation_static_links = {
+    'Logout' => '/users/sign_out'
+  }
+  
+  # Or add custom navigation with method specification
+  config.navigation_static_label = "Account"
 
   ### Popular gems integration
 
   ## == Devise ==
-  # config.authenticate_with do
-  #   warden.authenticate! scope: :user
-  # end
-  # config.current_user_method(&:current_user)
+  config.authenticate_with do
+    warden.authenticate! scope: :user
+  end
+  config.current_user_method(&:current_user)
+  
+  # Authorization - only allow admin users
+  config.authorize_with do |controller|
+    unless current_user&.user_role == 'admin'
+      redirect_to main_app.root_path, alert: 'Access denied. Admin privileges required.'
+    end
+  end
 
   ## == CancanCan ==
   # config.authorize_with :cancancan

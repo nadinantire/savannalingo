@@ -1,0 +1,14 @@
+<h2>Posts in "<%= @category.name %>" by You</h2>
+
+<% if @posts.any? %>
+  <ul>
+    <% @posts.each do |post| %>
+      <li>
+        <strong><%= link_to post.title, post_path(post) %></strong> <br>
+        <em><%= post.published_at&.strftime("%b %d, %Y") || "Not published" %></em>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>You have not written any posts in this category yet.</p>
+<% end %>

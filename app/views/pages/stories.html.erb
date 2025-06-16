@@ -1,0 +1,136 @@
+<% content_for :title, "Our Stories" %>
+<div class="stories-container">
+    <!-- Header Section -->
+    <div class="stories-header-section">
+        <div class="stories-header-content">
+            <h1 class="stories-page-title">
+                <span class="stories-heart-icon">♥</span>
+                Our Stories
+            </h1>
+            <div class="stories-search-container">
+                <%= form_with url: stories_path, method: :get, local: true, class: "stories-search-box" do |f| %>
+                    <%= f.text_field :search, placeholder: "Enter your keyword?", class: "stories-search-input", value: params[:search] %>
+                    <%= f.submit "🔍", class: "stories-search-btn" %>
+                <% end %>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Layout -->
+    <div class="stories-main-layout">
+        <!-- Posts Grid -->
+        <div class="stories-posts-content">
+            <div class="stories-posts-grid">
+                <% if @posts.present? %>
+                    <% @posts.each do |post| %>
+                        <article class="stories-post-card">
+                            <div class="stories-post-image">
+                                <% if post.respond_to?(:images) && post.images.present? %>
+                                    <%= image_tag url_for(post.images.first), alt: post.title if post.images.attached? %>
+                                <% else %>
+                                    <span>No Image</span>
+                                <% end %>
+                                <span class="stories-post-category <%= post.category.name.downcase %>">
+                                    <%= post.category.name %>
+                                </span>
+                            </div>
+                            <div class="stories-post-content">
+                                <h2 class="stories-post-title"><%= post.title %></h2>
+                                <div class="stories-post-meta">
+                                    <span class="stories-post-author">BY <%= post.user.respond_to?(:name) ? post.user.name.upcase : post.user.email.split('@').first.upcase %></span>
+                                    <span class="stories-post-date"><%= post.published_at&.strftime("%b %d, %Y")&.upcase || post.created_at.strftime("%b %d, %Y").upcase %></span>
+                                </div>
+                                <% if post.body.present? %>
+                                    <div class="stories-post-excerpt">
+                                        <%= truncate(strip_tags(post.body), length: 150) %>
+                                    </div>
+                                <% end %>
+                                <%= link_to "READ MORE", post_path(post.slug), class: "stories-read-more-btn" %>
+                            </div>
+                        </article>
+                    <% end %>
+                <% else %>
+                    <div style="grid-column: 1/-1; text-align: center; padding: 2rem; color: var(--gray);">
+                        <h3>No posts found</h3>
+                        <p>There are currently no published posts to display.</p>
+                    </div>
+                <% end %>
+            </div>
+        </div>
+
+        <aside class="stories-sidebar">
+            <!-- Recent Posts Section -->
+            <div class="stories-sidebar-section">
+                <h3 class="stories-sidebar-title">Recent Posts</h3>
+                
+                <% if @recent_posts.present? %>
+                    <% @recent_posts.each do |post| %>
+                        <div class="stories-popular-post">
+                            <div class="stories-popular-post-image">
+                                <% if post.respond_to?(:images) && post.images.present? %>
+                                    <%= image_tag url_for(post.images.first), alt: post.title if post.images.attached? %>
+                                <% else %>
+                                    <span>No Image</span>
+                                <% end %>
+                            </div>
+                            <div class="stories-popular-post-content">
+                                <div class="stories-popular-post-date"><%= post.published_at&.strftime("%b %d, %Y") || post.created_at.strftime("%b %d, %Y") %></div>
+                                <div class="stories-popular-post-title">
+                                    <%= link_to truncate(post.title, length: 50), post_path(post.id), style: "text-decoration: none; color: inherit;" %>
+                                </div>
+                            </div>
+                        </div>
+                    <% end %>
+                <% else %>
+                    <p style="color: var(--gray); font-size: 0.9rem;">No recent posts available.</p>
+                <% end %>
+            </div>
+
+            <!-- Recent Books Section -->
+            <div class="stories-sidebar-section">
+                <h3 class="stories-sidebar-title">Recent Books</h3>
+                
+                <% if @recent_books.present? %>
+                    <% @recent_books.each do |book| %>
+                        <div class="stories-recent-post">
+                            <div class="stories-recent-post-icon">
+                                <% if book.respond_to?(:image) && book.image.present? %>
+                                    <%= image_tag book.image, alt: book.title %>
+                                <% else %>
+                                    <span>📚</span>
+                                <% end %>
+                            </div>
+                            <div class="stories-recent-post-content">
+                                <div class="stories-recent-post-title">
+                                    <%= link_to truncate(book.title, length: 40), book_path(book), style: "text-decoration: none; color: inherit;" %>
+                                </div>
+                                <div class="stories-recent-post-date"><%= book.created_at.strftime("%b %d, %Y") %></div>
+                            </div>
+                        </div>
+                    <% end %>
+                <% else %>
+                    <p style="color: var(--gray); font-size: 0.9rem;">No recent books available.</p>
+                <% end %>
+            </div>
+
+            <!-- Categories Section -->
+            <div class="stories-sidebar-section">
+                <h3 class="stories-sidebar-title">Categories</h3>
+                
+                <div class="stories-category-item">
+                    <span class="stories-category-name">All</span>
+                    <span class="stories-category-count">(<%= @total_posts %>)</span>
+                </div>
+
+                <% if @categories.present? %>
+                    <% @categories.each do |category| %>
+                        <div class="stories-category-item">
+                            <span class="stories-category-name"><%= category.name %></span>
+                            <span class="stories-category-count">(<%= category.posts_count %>)</span>
+                        </div>
+                    <% end %>
+                <% end %>
+            </div>
+        </aside>
+    </div>
+</div>
