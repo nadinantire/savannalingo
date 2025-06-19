@@ -1,0 +1,40 @@
+name: Deploy Rails App and Run Migrations
+
+on:
+  push:
+    branches:
+      - main  # or your default branch name
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.3.3
+          bundler-cache: true
+
+      - name: Install dependencies
+        run: |
+          gem install bundler
+          bundle install --jobs 4 --retry 3
+
+      - name: Run migrations
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          RAILS_ENV: production
+        run: |
+          bundle exec rails db:migrate
+
+      - name: Deploy to Render
+        uses: render-examples/render-deploy@v1
+        env:
+          RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
+        with:
+          service-id: your-render-service-id
+
