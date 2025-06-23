@@ -7,7 +7,7 @@
     <title>Home | Savanna Lingo</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-    <style>
+ <style>
                :root {
     --primary: #3b82f6;
     --primary-dark: #2563eb;
@@ -33,187 +33,264 @@ body {
 
         
         /* Hero Section */
-.hero {
-    padding: 2rem 0;
-    background-color: var(--primary);
-    color: white;
-    background-image: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-}
+/* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
 
-.hero-content {
-    display: flex;
-    flex-direction: row;  /* Use row direction for horizontal alignment */
-    gap: 1.5rem;
-    align-items: center; /* Center-align vertically */
-    max-width: 100%;
-}
+        .hero-slider {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+        }
 
-.hero h1 {
-    font-size: 3rem;
-    font-weight: 700;
-    line-height: 1.2;
-}
+        .hero-slide {
+            display: none;
+            width: 100%;
+            animation: fadeIn 1s ease-in-out;
+        }
 
-.hero p {
-    font-size: 1.2rem;
-    opacity: 0.9;
-}
+        .hero-slide.active {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
 
-.cta-btn {
-    display: inline-block;
-    background-color: white;
-    color: var(--primary);
-    padding: 0.8rem 1.5rem;
-    border-radius: 5px;
-    font-weight: 600;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    max-width: fit-content;
-}
+        .hero-img-container {
+            flex: 1;
+            max-width: 50%;
+        }
 
-.cta-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-}
+        .hero-img {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            object-fit: cover;
+        }
 
-/* Hero Slider */
-.hero-slider {
-    position: relative;
-    display: flex;
-    overflow: hidden;
-    justify-content: center; /* Center the content */
-}
+        .hero-text-container {
+            flex: 1;
+            max-width: 50%;
+            padding-left: 2rem;
+        }
 
-.hero-slide {
-    display: none;
-    width: 100%;
-    justify-content: center;
-    animation: fade 1s ease-in-out;
-}
+        .hero-text-container h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
 
-.hero-slide.active {
-    display: flex;
-}
+        .hero-text-container p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
 
-/* Ensure Image and Text are in separate columns (side by side) */
-.hero-slide .hero-img-container {
-    width: 50%;
-    padding-right: 1.5rem;
-}
+        .cta-btn {
+            display: inline-block;
+            background-color: white;
+            color: var(--primary);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
 
-.hero-slide .hero-text-container {
-    width: 50%;
-    padding-left: 1.5rem;
-    color: white;
-}
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
 
-.hero-img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    border-radius: 10px;
-}
+        /* Navigation Buttons */
+        .slider-nav {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            z-index: 10;
+            padding: 0 1rem;
+        }
 
-/* Hero Text Styles */
-.hero-text-container h1 {
-    font-size: 2.5rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
-}
+        .prev-btn,
+        .next-btn {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 1rem;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-.hero-text-container p {
-    font-size: 1.2rem;
-    margin-bottom: 1.5rem;
-}
+        .prev-btn:hover,
+        .next-btn:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
 
-/* Navigation Buttons */
-.slider-nav {
-    position: absolute;
-    top: 50%;
-    left: 0;
-    right: 0;
-    display: flex;
-    justify-content: space-between;
-    transform: translateY(-50%);
-    z-index: 10;
-}
+        /* Slide dots indicator */
+        .slide-indicators {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 0.5rem;
+            z-index: 10;
+        }
 
-.prev-btn,
-.next-btn {
-    background-color: rgba(0, 0, 0, 0.3);
-    color: white;
-    padding: 1rem;
-    border: none;
-    font-size: 2rem;
-    cursor: pointer;
-    border-radius: 50%;
-    transition: background-color 0.3s ease;
-}
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.4);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
 
-.prev-btn:hover,
-.next-btn:hover {
-    background-color: rgba(0, 0, 0, 0.6);
-}
+        .dot.active {
+            background-color: white;
+            transform: scale(1.2);
+        }
 
-/* Slide Transition Animation */
-@keyframes fade {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
-}
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
 
-@media (max-width: 768px) {
-    .container {
-        width: 100%;
-        max-width: 100%;
-        padding: 0 1rem; /* small side padding */
-    }
+        /* Mobile Responsive Design */
+        @media (max-width: 768px) {
+            .hero {
+                min-height: 100vh;
+                padding: 2rem 0;
+            }
 
-    .hero-content {
-    flex-direction: column;  /* Use row direction for horizontal alignment */
-    gap: 0.5rem;
-    align-items: center; /* Center-align vertically */
-    max-width: 100%;
-}
+            .container {
+                padding: 0 1rem;
+            }
 
-    .hero-slider {
-        display: block;
-        width: 100%;
-    }
+            .hero-slide.active {
+                flex-direction: row;
+                align-items: center;
+                gap: 1rem;
+                height: auto;
+                min-height: 70vh;
+            }
 
-    .hero-slide {
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-        margin: 0 auto;
-    }
+            .hero-img-container {
+                flex: 0 0 45%;
+                max-width: 45%;
+            }
 
-    .hero-img-container,
-    .hero-text-container {
-        width: 100%; /* now they will be 80% inside 100% slide */
-        padding: 1rem 0;
-    }
+            .hero-img {
+                width: 100%;
+                height: auto;
+                min-height: 250px;
+                object-fit: cover;
+                border-radius: 15px;
+            }
 
-    .hero-text-container h1,
-    .hero-text-container p {
-        text-align: center;
-    }
+            .hero-text-container {
+                flex: 1;
+                max-width: 55%;
+                padding-left: 1rem;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
 
-    .hero-text-container h1 {
-        font-size: 2rem;
-    }
+            .hero-text-container h1 {
+                font-size: 1.8rem;
+                line-height: 1.3;
+                margin-bottom: 1rem;
+            }
 
-    .hero-text-container p {
-        font-size: 1rem;
-    }
-}
+            .hero-text-container p {
+                font-size: 0.95rem;
+                margin-bottom: 1.5rem;
+                line-height: 1.5;
+            }
 
+            .cta-btn {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+                align-self: flex-start;
+            }
 
+            .slider-nav {
+                padding: 0 0.5rem;
+            }
 
+            .prev-btn,
+            .next-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+                padding: 0.5rem;
+            }
 
+            .slide-indicators {
+                bottom: 1rem;
+            }
+
+            .dot {
+                width: 10px;
+                height: 10px;
+            }
+        }
+
+        /* Extra small screens */
+        @media (max-width: 480px) {
+            .hero-slide.active {
+                gap: 0.75rem;
+                min-height: 60vh;
+            }
+
+            .hero-img-container {
+                flex: 0 0 42%;
+                max-width: 42%;
+            }
+
+            .hero-text-container {
+                max-width: 58%;
+                padding-left: 0.75rem;
+            }
+
+            .hero-text-container h1 {
+                font-size: 1.5rem;
+                margin-bottom: 0.8rem;
+            }
+
+            .hero-text-container p {
+                font-size: 0.85rem;
+                margin-bottom: 1.2rem;
+            }
+
+            .cta-btn {
+                padding: 0.7rem 1.2rem;
+                font-size: 0.85rem;
+            }
+        }
        /* Services Section */
         .section {
             padding: 5rem 0;
@@ -853,35 +930,78 @@ body {
             </div>
         </section>
         <script>
-            let currentSlide = 0;
-            const slides = document.querySelectorAll('.hero-slide');
-            const totalSlides = slides.length;
-            let slideInterval = setInterval(nextSlide, 5000); // Start auto-slide
-        
-            function showSlide(index) {
-                // Keep index within bounds
-                if (index >= totalSlides) currentSlide = 0;
-                if (index < 0) currentSlide = totalSlides - 1;
-        
-                slides.forEach(slide => slide.classList.remove('active'));
-                slides[currentSlide].classList.add('active');
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.hero-slide');
+        const dots = document.querySelectorAll('.dot');
+        const totalSlides = slides.length;
+        let slideInterval = setInterval(nextSlide, 5000);
+
+        function showSlide(index) {
+            if (index >= totalSlides) currentSlide = 0;
+            if (index < 0) currentSlide = totalSlides - 1;
+
+            // Update slides
+            slides.forEach(slide => slide.classList.remove('active'));
+            slides[currentSlide].classList.add('active');
+
+            // Update dots
+            dots.forEach(dot => dot.classList.remove('active'));
+            dots[currentSlide].classList.add('active');
+        }
+
+        function nextSlide() {
+            currentSlide++;
+            showSlide(currentSlide);
+        }
+
+        function prevSlide() {
+            currentSlide--;
+            showSlide(currentSlide);
+        }
+
+        function currentSlideSet(n) {
+            currentSlide = n - 1;
+            showSlide(currentSlide);
+            resetInterval();
+        }
+
+        function resetInterval() {
+            clearInterval(slideInterval);
+            slideInterval = setInterval(nextSlide, 5000);
+        }
+
+        // Pause on hover
+        const slider = document.querySelector('.hero-slider');
+        slider.addEventListener('mouseover', () => clearInterval(slideInterval));
+        slider.addEventListener('mouseout', () => slideInterval = setInterval(nextSlide, 5000));
+
+        // Touch support for mobile
+        let startX = 0;
+        let endX = 0;
+
+        slider.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+        });
+
+        slider.addEventListener('touchend', (e) => {
+            endX = e.changedTouches[0].clientX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            const threshold = 50;
+            const diff = startX - endX;
+
+            if (Math.abs(diff) > threshold) {
+                if (diff > 0) {
+                    nextSlide();
+                } else {
+                    prevSlide();
+                }
+                resetInterval();
             }
-        
-            function nextSlide() {
-                currentSlide++;
-                showSlide(currentSlide);
-            }
-        
-            function prevSlide() {
-                currentSlide--;
-                showSlide(currentSlide);
-            }
-        
-            // Pause on hover
-            const slider = document.querySelector('.hero-slider');
-            slider.addEventListener('mouseover', () => clearInterval(slideInterval));
-            slider.addEventListener('mouseout', () => slideInterval = setInterval(nextSlide, 5000));
-        </script>
+        }
+    </script>
        <section id="services" class="section">
         <div class="container">
             <div class="section-wrapper">
