@@ -40,5 +40,30 @@
     <%= yield %>
     <!-- Footer Partial -->
     <%= render 'pages/footer' %>
+    <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    alert("JS loaded and working!");
+    
+    const mobileMenuBtn = document.querySelector('.sl-mobile-menu-btn');
+    const navCenter = document.querySelector('.sl-nav-center');
+
+    if (!mobileMenuBtn || !navCenter) return;
+
+    const newBtn = mobileMenuBtn.cloneNode(true);
+    mobileMenuBtn.parentNode.replaceChild(newBtn, mobileMenuBtn);
+
+    newBtn.addEventListener('click', () => {
+      navCenter.classList.toggle('active');
+    });
+
+    const navItems = document.querySelectorAll('.sl-nav-links a');
+    navItems.forEach(item => {
+      item.addEventListener('click', () => {
+        navCenter.classList.remove('active');
+      });
+    });
+  });
+</script>
+
   </body>
 </html>
