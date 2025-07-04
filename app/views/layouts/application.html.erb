@@ -1,31 +1,30 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Savanna Lingo</title>
-    <%= favicon_link_tag 'logo.jpeg' %>
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="turbo-cache-control" content="no-cache">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-    
+<head>
+  <title>Savanna Lingo</title>
+  <%= favicon_link_tag 'logo.jpeg' %>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="turbo-cache-control" content="no-cache">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  
+  <%= yield :head %>
 
-    <%= yield :head %>
-
-    <link rel="manifest" href="/manifest.json">
-    <link rel="icon" href="/icon.png" type="image/png">
-    <link rel="icon" href="/icon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/icon.png">
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
-    <%= javascript_importmap_tags %>
-    <%= stylesheet_link_tag 'auth', 'data-turbo-track': 'reload' %>
-    
-    
-    
-  </head>
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" href="/icon.png" type="image/png">
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/icon.png">
+  
+  <!-- CSS files -->
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <%= stylesheet_link_tag 'auth', 'data-turbo-track': 'reload' %>
+  
+  <!-- JavaScript files -->
+  <%= javascript_importmap_tags %>
+  <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+</head>
 
   <body>
     <%= render 'pages/header' %><% if notice.present? %>

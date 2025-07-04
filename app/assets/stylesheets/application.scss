@@ -9,3 +9,78 @@ body {
   height: auto;
   display: block;
 }
+
+// ActionText specific styles
+.trix-content {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+  
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  h1 {
+    font-size: 1.2em;
+    line-height: 1.2;
+    margin-bottom: 0.5em;
+  }
+  
+  blockquote {
+    border: 0 solid #ccc;
+    border-left-width: 0.3em;
+    margin-left: 0.3em;
+    padding-left: 0.6em;
+    margin-bottom: 1em;
+  }
+  
+  pre {
+    display: inline-block;
+    width: 100%;
+    vertical-align: top;
+    font-family: monospace;
+    font-size: 0.9em;
+    padding: 0.5em;
+    white-space: pre;
+    background-color: #eee;
+    overflow-x: auto;
+    margin-bottom: 1em;
+  }
+  
+  ul, ol {
+    margin-left: 1.5em;
+    margin-bottom: 1em;
+  }
+  
+  li {
+    margin-bottom: 0.2em;
+  }
+}
+
+// Ensure Trix editor is properly styled
+trix-editor {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 10px;
+  min-height: 200px;
+  
+  &:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  }
+}
+
+// Fix for form styling
+.form-group {
+  margin-bottom: 1rem;
+  
+  label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+  }
+}
