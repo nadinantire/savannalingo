@@ -1,7 +1,10 @@
-@import "actiontext";
-@import "trix";
+@use "actiontext" as *;
+@use "trix" as *;
+
 @import "trix.css";
 @import "trix/dist/trix.css";
+
+
 body {
   background: white;
 }
