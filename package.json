@@ -2,11 +2,11 @@
   "dependencies": {
     "@rails/actiontext": "^8.0.200",
     "rails_admin": "3.3.0",
-    "sass": "^1.89.0",
+    "sass": "^1.89.2",
     "trix": "^2.1.15"
   },
   "scripts": {
     "build": "esbuild app/javascript/*.* --bundle --outdir=app/assets/builds",
-    "build:css": "sass ./app/assets/stylesheets/application.sass.scss:./app/assets/builds/application.css ./app/assets/stylesheets/rails_admin.scss:./app/assets/builds/rails_admin.css --no-source-map --load-path=node_modules"
+    "build:css": "sass ./app/assets/stylesheets/application.scss:./app/assets/builds/application.css --no-source-map --load-path=node_modules"
   }
 }
