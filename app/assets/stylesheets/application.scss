@@ -10,77 +10,118 @@ body {
   display: block;
 }
 
-// ActionText specific styles
+/* ActionText Styles */
 .trix-content {
   font-family: inherit;
   font-size: inherit;
   line-height: inherit;
   color: inherit;
-  
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-  
-  h1 {
-    font-size: 1.2em;
-    line-height: 1.2;
-    margin-bottom: 0.5em;
-  }
-  
-  blockquote {
-    border: 0 solid #ccc;
-    border-left-width: 0.3em;
-    margin-left: 0.3em;
-    padding-left: 0.6em;
-    margin-bottom: 1em;
-  }
-  
-  pre {
-    display: inline-block;
-    width: 100%;
-    vertical-align: top;
-    font-family: monospace;
-    font-size: 0.9em;
-    padding: 0.5em;
-    white-space: pre;
-    background-color: #eee;
-    overflow-x: auto;
-    margin-bottom: 1em;
-  }
-  
-  ul, ol {
-    margin-left: 1.5em;
-    margin-bottom: 1em;
-  }
-  
-  li {
-    margin-bottom: 0.2em;
-  }
 }
 
-// Ensure Trix editor is properly styled
+.trix-content * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.trix-content h1 {
+  font-size: 1.2em;
+  line-height: 1.2;
+  margin-bottom: 0.5em;
+}
+
+.trix-content blockquote {
+  border: 0 solid #ccc;
+  border-left-width: 0.3em;
+  margin-left: 0.3em;
+  padding-left: 0.6em;
+  margin-bottom: 1em;
+}
+
+.trix-content pre {
+  display: inline-block;
+  width: 100%;
+  vertical-align: top;
+  font-family: monospace;
+  font-size: 0.9em;
+  padding: 0.5em;
+  white-space: pre;
+  background-color: #eee;
+  overflow-x: auto;
+  margin-bottom: 1em;
+}
+
+.trix-content ul, .trix-content ol {
+  margin-left: 1.5em;
+  margin-bottom: 1em;
+}
+
+.trix-content li {
+  margin-bottom: 0.2em;
+}
+
+/* Trix Editor Styling */
 trix-editor {
   border: 1px solid #ccc;
   border-radius: 4px;
   padding: 10px;
   min-height: 200px;
-  
-  &:focus {
-    outline: none;
-    border-color: #007bff;
-    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-  }
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+  background-color: white;
 }
 
-// Fix for form styling
+trix-editor:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+trix-editor:empty:not(:focus)::before {
+  color: #999;
+}
+
+/* Form styling */
 .form-group {
   margin-bottom: 1rem;
-  
-  label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: bold;
-  }
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+/* Trix toolbar styling */
+trix-toolbar {
+  border: 1px solid #ccc;
+  border-bottom: none;
+  border-radius: 4px 4px 0 0;
+  background-color: #f8f9fa;
+  padding: 8px;
+}
+
+trix-toolbar .trix-button-group {
+  display: inline-block;
+  margin-right: 8px;
+}
+
+trix-toolbar .trix-button {
+  background: none;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  padding: 4px 8px;
+  margin-right: 2px;
+  cursor: pointer;
+}
+
+trix-toolbar .trix-button:hover {
+  background-color: #e9ecef;
+}
+
+trix-toolbar .trix-button.trix-active {
+  background-color: #007bff;
+  color: white;
 }

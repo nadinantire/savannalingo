@@ -26,3 +26,5 @@ document.addEventListener('turbo:load', () => {
     }
   });
 });
+// Posts specific JavaScript
+console.log('Posts JavaScript loaded');
