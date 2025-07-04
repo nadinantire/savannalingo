@@ -1,6 +1,7 @@
-// @import "rails_admin";
-@import "trix_and_actiontext";
-
+@import "actiontext";
+@import "trix";
+@import "trix.css";
+@import "trix/dist/trix.css";
 body {
   background: white;
 }
