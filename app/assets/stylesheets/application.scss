@@ -1,8 +1,7 @@
-@use "actiontext" as *;
+@import "actiontext";
 @use "trix" as *;
-
-@import "trix.css";
 @import "trix/dist/trix.css";
+@import "rails_admin";
 
 
 body {
