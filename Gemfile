@@ -54,7 +54,7 @@ group :test do
 end
 
 gem "devise", "~> 4.9"
-gem 'rails_admin'
+gem 'rails_admin', '~> 3.3.0'
 gem "cssbundling-rails"
 gem 'sassc'
 gem "net-protocol", "~> 0.2.2"

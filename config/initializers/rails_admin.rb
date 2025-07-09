@@ -11,6 +11,8 @@ RailsAdmin.config do |config|
   
   # Or add custom navigation with method specification
   config.navigation_static_label = "Account"
+  config.asset_source = :sprockets
+
 
   ### Popular gems integration
 
