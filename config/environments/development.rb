@@ -87,5 +87,23 @@ config.hosts = [
   /.*\.savannalingo\.com/,      # Wildcard subdomains
   "localhost",                  # For local development
   "127.0.0.1"                   # Also allow loopback IP
+  # Add Cloudflare IP ranges for proxied requests
+    /^172\.6[4-9]\./,             # Cloudflare IP range
+    /^172\.7[0-9]\./,             # Cloudflare IP range
+    /^173\.245\./,                # Cloudflare IP range
+    /^103\.21\./,                 # Cloudflare IP range
+    /^103\.22\./,                 # Cloudflare IP range
+    /^103\.31\./,                 # Cloudflare IP range
+    /^141\.101\./,                # Cloudflare IP range
+    /^108\.162\./,                # Cloudflare IP range
+    /^190\.93\./,                 # Cloudflare IP range
+    /^188\.114\./,                # Cloudflare IP range
+    /^197\.234\./,                # Cloudflare IP range
+    /^198\.41\./,                 # Cloudflare IP range
+    /^162\.158\./,                # Cloudflare IP range
+    /^104\.16\./,                 # Cloudflare IP range
+    /^104\.24\./,                 # Cloudflare IP range
+    /^172\.64\./,                 # Cloudflare IP range
+    /^131\.0\.72\./               # Cloudflare IP range
 ]
 end

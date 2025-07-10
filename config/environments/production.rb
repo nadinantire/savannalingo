@@ -43,7 +43,6 @@ Rails.application.configure do
   # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = :local
 
-
   # Mount Action Cable outside main process or domain.
   # config.action_cable.mount_path = nil
   # config.action_cable.url = "wss://example.com/cable"
@@ -51,10 +50,10 @@ Rails.application.configure do
 
   # Assume all access to the app is happening through a SSL-terminating reverse proxy.
   # Can be used together with config.force_ssl for Strict-Transport-Security and secure cookies.
-  # config.assume_ssl = true
+  config.assume_ssl = true
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
-  config.force_ssl = false
+  config.force_ssl = true
 
   # Skip http-to-https redirect for the default health check endpoint.
   # config.ssl_options = { redirect: { exclude: ->(request) { request.path == "/up" } } }
@@ -67,7 +66,6 @@ Rails.application.configure do
   # Prepend all log lines with the following tags.
   config.log_tags = [ :request_id ]
   config.public_file_server.enabled = ENV["RAILS_SERVE_STATIC_FILES"].present?
-
 
   # "info" includes generic and useful information about system operation, but avoids logging too much
   # information to avoid inadvertent exposure of personally identifiable information (PII). If you
@@ -91,7 +89,7 @@ Rails.application.configure do
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
-   config.i18n.fallbacks = true
+  config.i18n.fallbacks = true
 
   # Don't log any deprecations.
   config.active_support.report_deprecations = false
@@ -103,14 +101,35 @@ Rails.application.configure do
   config.active_record.attributes_for_inspect = [ :id ]
 
   # Enable DNS rebinding protection and other `Host` header attacks.
-  # Enable DNS rebinding protection and allow only specific hosts
+  # Updated host configuration for Cloudflare proxy
   config.hosts = [
     "savannalingo.com",           # Your main domain
     "www.savannalingo.com",       # Your subdomain
-    "161.35.62.37",               # IP address access (optional, can remove later)
-    /.*\.savannalingo\.com/       # Any subdomain like app.savannalingo.com
+    "161.35.62.37",               # IP address access (for direct access)
+    /.*\.savannalingo\.com/,      # Any subdomain like app.savannalingo.com
+    # Add Cloudflare IP ranges for proxied requests
+    /^172\.6[4-9]\./,             # Cloudflare IP range
+    /^172\.7[0-9]\./,             # Cloudflare IP range
+    /^173\.245\./,                # Cloudflare IP range
+    /^103\.21\./,                 # Cloudflare IP range
+    /^103\.22\./,                 # Cloudflare IP range
+    /^103\.31\./,                 # Cloudflare IP range
+    /^141\.101\./,                # Cloudflare IP range
+    /^108\.162\./,                # Cloudflare IP range
+    /^190\.93\./,                 # Cloudflare IP range
+    /^188\.114\./,                # Cloudflare IP range
+    /^197\.234\./,                # Cloudflare IP range
+    /^198\.41\./,                 # Cloudflare IP range
+    /^162\.158\./,                # Cloudflare IP range
+    /^104\.16\./,                 # Cloudflare IP range
+    /^104\.24\./,                 # Cloudflare IP range
+    /^172\.64\./,                 # Cloudflare IP range
+    /^131\.0\.72\./               # Cloudflare IP range
   ]
 
+  # Alternative: Disable host checking entirely (less secure but simpler)
+  # config.hosts.clear
+
   # Skip DNS rebinding protection for the default health check endpoint.
-    # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
-  end
+  # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
+end
