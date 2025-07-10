@@ -7,12 +7,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-enum user_role: {
-  visitor: "visitor",
-  blogger: "blogger",
-  publisher: "publisher",
-  admin: "admin"
-}
+enum :user_role, {visitor: "visitor", blogger: "blogger", publisher: "publisher", admin: "admin"}
+
   after_initialize :set_default_role, if: :new_record?
 
   def set_default_role
