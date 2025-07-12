@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@hotwired/stimulus": "^3.2.2",
     "@rails/actiontext": "^8.0.200",
     "bootstrap": "^5.3.7",
     "jquery": "^3.7.1",
@@ -9,7 +10,10 @@
     "trix": "^2.1.15"
   },
   "scripts": {
-    "build": "esbuild app/javascript/*.* --bundle --outdir=app/assets/builds",
+    "build": "esbuild app/javascript/*.* --bundle --sourcemap --format=esm --outdir=app/assets/builds --public-path=/assets",
     "build:css": "sass ./app/assets/stylesheets/application.scss:./app/assets/builds/application.css --no-source-map --load-path=node_modules"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.6"
   }
 }

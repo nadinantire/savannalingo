@@ -5,9 +5,6 @@ class Post < ApplicationRecord
   has_many_attached :images
   has_rich_text :body
    enum status: { draft: 0, published: 1, archived: 2 }
-
-
-
   validates :title, :status, presence: true
   scope :published, -> { where(status: 'published') }
   scope :recent, -> { order(published_at: :desc) }

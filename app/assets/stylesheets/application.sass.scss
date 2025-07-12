@@ -1,11 +1,4 @@
 // Entry point for your Sass build
-@use "actiontext" as *;
-@use "trix" as *;
-
-@import "trix.css";
 @import "trix/dist/trix.css";
 @import "rails_admin";
-@import "actiontext";
-
-
 @import 'actiontext.css';

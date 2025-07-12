@@ -1,12 +1,8 @@
-import "controllers"
+import "@hotwired/turbo-rails"
+import "./controllers"
 import "./posts"
 import "trix"
 import "@rails/actiontext"
-import "@rails/ujs"
-
-
-import Rails from "@rails/ujs"
-Rails.start()
 
 document.addEventListener('turbo:load', () => {
   const container = document.getElementById('content-blocks');

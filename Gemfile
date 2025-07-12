@@ -59,3 +59,7 @@ gem "cssbundling-rails"
 gem 'sassc'
 gem "net-protocol", "~> 0.2.2"
 gem 'sassc-rails'
+gem 'trix'
+gem 'actiontext'
+gem "jsbundling-rails"
+
