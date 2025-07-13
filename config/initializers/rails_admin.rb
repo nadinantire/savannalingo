@@ -12,7 +12,11 @@ RailsAdmin.config do |config|
   # Or add custom navigation with method specification
   config.navigation_static_label = "Account"
   config.asset_source = :sprockets
-
+  config.excluded_models << 'ActiveStorage::Attachment'
+  config.excluded_models << 'ActiveStorage::Blob'
+  config.excluded_models << 'ActiveStorage::VariantRecord'
+  config.excluded_models << 'ActionText::RichText'
+  config.excluded_models << 'ActionText::EncryptedRichText'
 
   ### Popular gems integration
 
