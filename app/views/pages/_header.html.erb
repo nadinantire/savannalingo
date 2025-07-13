@@ -5,7 +5,6 @@
   <title>Savanna Lingo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    /* Unique prefixes used: sl- */
     :root {
       --primary: #3b82f6;
       --primary-dark: #2563eb;
@@ -77,6 +76,7 @@
       display: flex;
       gap: 2rem;
       list-style: none;
+      position: relative;
     }
 
     .sl-nav-links a {
@@ -87,10 +87,7 @@
       transition: all 0.3s ease;
     }
 
-    .sl-nav-links a:hover {
-      color: var(--primary);
-    }
-
+    .sl-nav-links a:hover,
     .sl-nav-links a.active {
       color: var(--primary);
     }
@@ -122,7 +119,6 @@
       font-size: 0.9rem;
       transition: all 0.3s ease;
       cursor: pointer;
-      display: inline-block;
     }
 
     .sl-auth-btn:hover {
@@ -165,66 +161,112 @@
       display: none;
       background: none;
       border: none;
-      font-size: 1.5rem;
+      font-size: 2rem; /* Increased for visibility */
       cursor: pointer;
       color: var(--dark);
     }
 
+    /* Dropdown */
+    .sl-dropdown {
+      position: relative;
+    }
+
+    .sl-dropdown-menu {
+      display: none;
+      position: absolute;
+      background-color: white;
+      top: 100%;
+      left: 0;
+      min-width: 200px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      border-radius: 4px;
+      overflow: hidden;
+      z-index: 999;
+    }
+
+    .sl-dropdown-menu a {
+      display: block;
+      padding: 0.75rem 1rem;
+      color: var(--dark);
+      text-decoration: none;
+      border-bottom: 1px solid var(--light-gray);
+    }
+
+    .sl-dropdown-menu a:hover {
+      background-color: var(--light-gray);
+      color: var(--primary);
+    }
+
+    .sl-dropdown:hover .sl-dropdown-menu {
+      display: block;
+    }
+
     @media (max-width: 768px) {
-  .sl-mobile-menu-btn {
-    display: block;
-  }
+      .sl-mobile-menu-btn {
+        display: block;
+      }
 
-  .sl-nav-center {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background-color: white;
-    flex-direction: column;
-    align-items: flex-start;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s ease;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-    z-index: 999;
-  }
+      .sl-nav-center {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: white;
+        flex-direction: column;
+        align-items: flex-start;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        z-index: 999;
+      }
 
-  .sl-nav-center.active {
-    max-height: 90vh;         /* Limit max height to 90% of screen */
-    overflow-y: auto;         /* Enable scroll when needed */
-  }
+      .sl-nav-center.active {
+        max-height: 90vh;
+        overflow-y: auto;
+      }
 
-  .sl-nav-links {
-    flex-direction: column;
-    width: 100%;
-  }
+      .sl-nav-links {
+        flex-direction: column;
+        width: 100%;
+      }
 
-  .sl-nav-links li {
-    width: 100%;
-  }
+      .sl-nav-links li {
+        width: 100%;
+      }
 
-  .sl-nav-links a {
-    display: block;
-    padding: 1rem 2rem;
-    border-bottom: 1px solid var(--light-gray);
-    width: 100%;
-  }
+      .sl-nav-links a {
+        display: block;
+        padding: 1rem 2rem;
+        border-bottom: 1px solid var(--light-gray);
+        width: 100%;
+      }
 
-  .sl-auth-buttons {
-    flex-direction: column;
-    gap: 0.5rem;
-    padding: 1rem 2rem;
-    width: 100%;
-  }
+      .sl-dropdown-menu {
+        position: static;
+        box-shadow: none;
+        border: none;
+        display: none;
+        padding-left: 2rem;
+      }
 
-  .sl-auth-btn,
-  .sl-logout-btn {
-    width: 100%;
-    text-align: center;
-  }
-}
+      .sl-dropdown.active .sl-dropdown-menu {
+        display: block;
+      }
 
+      .sl-auth-buttons {
+        flex-direction: column;
+        gap: 0.5rem;
+        padding: 1rem 2rem;
+        width: 100%;
+      }
+
+      .sl-auth-btn,
+      .sl-logout-btn {
+        width: 100%;
+        text-align: center;
+      }
+    }
   </style>
 </head>
 <body>
@@ -237,14 +279,23 @@
         <span>Savanna Lingo</span>
       </a>
 
-      <button class="sl-mobile-menu-btn">≡</button>
+      <button class="sl-mobile-menu-btn">☰</button>
 
       <div class="sl-nav-center">
         <ul class="sl-nav-links">
           <li><%= link_to 'Home', root_path, class: "active" %></li>
           <li><%= link_to 'About', about_path %></li>
           <li><%= link_to 'Posts', stories_path %></li>
-          <li><%= link_to 'Books', books_path %></li>
+
+          <!-- Dropdown for Creative Work -->
+          <li class="sl-dropdown">
+            <a href="#">Creative Work</a>
+            <ul class="sl-dropdown-menu">
+              <li><%= link_to 'Books', books_path %></li>
+              <li><%= link_to 'Templates', books_path %></li>
+              <li><%= link_to 'Craft', books_path %></li>
+            </ul>
+          </li>
 
           <% if user_signed_in? %>
             <% if current_user.user_role == 'admin' %>
@@ -259,7 +310,6 @@
         <div class="sl-auth-buttons">
           <% if user_signed_in? %>
             <%= button_to 'Logout', destroy_user_session_path, method: :delete, class: 'sl-logout-btn' %>
-
           <% else %>
             <%= link_to "Login", new_user_session_path, class: "sl-auth-btn secondary" %>
             <%= link_to "Register", new_user_registration_path, class: "sl-auth-btn" %>
@@ -272,30 +322,37 @@
 
 <script>
   document.addEventListener('turbo:load', () => {
-  const mobileMenuBtn = document.querySelector('.sl-mobile-menu-btn');
-  const navCenter = document.querySelector('.sl-nav-center');
+    const mobileMenuBtn = document.querySelector('.sl-mobile-menu-btn');
+    const navCenter = document.querySelector('.sl-nav-center');
+    const dropdown = document.querySelector('.sl-dropdown');
 
-  if (!mobileMenuBtn || !navCenter) return;
+    if (!mobileMenuBtn || !navCenter) return;
 
-  // Remove old listeners by cloning
-  const newBtn = mobileMenuBtn.cloneNode(true);
-  mobileMenuBtn.parentNode.replaceChild(newBtn, mobileMenuBtn);
+    const newBtn = mobileMenuBtn.cloneNode(true);
+    mobileMenuBtn.parentNode.replaceChild(newBtn, mobileMenuBtn);
 
-  newBtn.addEventListener('click', () => {
-    navCenter.classList.toggle('active');
-  });
-
-  const navItems = document.querySelectorAll('.sl-nav-links a');
-  navItems.forEach(item => {
-    item.addEventListener('click', () => {
-      navCenter.classList.remove('active');
+    newBtn.addEventListener('click', () => {
+      navCenter.classList.toggle('active');
     });
+
+    const navItems = document.querySelectorAll('.sl-nav-links a');
+    navItems.forEach(item => {
+      item.addEventListener('click', () => {
+        navCenter.classList.remove('active');
+      });
+    });
+
+    // Toggle dropdown for mobile
+    if (dropdown) {
+      dropdown.addEventListener('click', (e) => {
+        if (window.innerWidth <= 768) {
+          e.preventDefault();
+          dropdown.classList.toggle('active');
+        }
+      });
+    }
   });
-});
-
-  
 </script>
-
 
 </body>
 </html>
