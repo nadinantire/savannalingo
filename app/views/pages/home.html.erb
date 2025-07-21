@@ -312,7 +312,7 @@ html, body {
     flex: none !important;
   }
   .hero-text-container h1 {
-    font-size: 2rem !important;
+    font-size: 1rem !important;
   }
 
   /* Sidebar moves below main content */
@@ -351,19 +351,20 @@ html, body {
     grid-template-columns: 1fr !important;
   }
 }
+  
 
        /* Services Section */
         .section {
             padding: 5rem 0;
             background-color: #f8f9fa;
         }
-
-        .section-wrapper {
-  display: grid;
-  grid-template-columns: 1fr 300px;
-  gap: 3rem;
-  align-items: start;
+.section-wrapper {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
 }
+
+  
 
 /* Responsive fix: on small screens stack sidebar below main content */
 @media (max-width: 768px) {
@@ -378,9 +379,16 @@ html, body {
   }
 }
 
-        .main-content {
-            min-width: 0; /* Prevents grid overflow */
-        }
+.main-content {
+    flex: 1;
+}
+
+.sidebar {
+    width: 300px;
+    flex-shrink: 0;
+}
+
+            
 
         .section-header {
             text-align: center;
@@ -401,9 +409,10 @@ html, body {
 
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(3, 1fr); /* Fixed 3 columns */
             gap: 2rem;
         }
+
 
         .service-card {
             background-color: white;

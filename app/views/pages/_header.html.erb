@@ -285,24 +285,24 @@
         <ul class="sl-nav-links">
           <li><%= link_to 'Home', root_path, class: "active" %></li>
           <li><%= link_to 'About', about_path %></li>
-          <li><%= link_to 'Posts', stories_path %></li>
+          <li><%= link_to 'Blogs', stories_path %></li>
 
           <!-- Dropdown for Creative Work -->
           <li class="sl-dropdown">
-            <a href="#">Creative Work</a>
+            <a href="#">Creative Works</a>
             <ul class="sl-dropdown-menu">
               <li><%= link_to 'Books', books_path %></li>
               <li><%= link_to 'Templates', books_path %></li>
-              <li><%= link_to 'Craft', books_path %></li>
+              <li><%= link_to 'Crafts', books_path %></li>
             </ul>
           </li>
 
           <% if user_signed_in? %>
             <% if current_user.user_role == 'admin' %>
-              <li><%= link_to "Posts", posts_path %></li>
+              <li><%= link_to "Blogs", posts_path %></li>
               <li><%= link_to "Admin Dashboard", rails_admin_path %></li>
             <% elsif current_user.user_role == 'blogger' %>
-              <li><%= link_to "My Posts", posts_path %></li>
+              <li><%= link_to "My Blogs", posts_path %></li>
             <% end %>
           <% end %>
         </ul>
