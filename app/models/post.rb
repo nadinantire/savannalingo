@@ -9,8 +9,16 @@ class Post < ApplicationRecord
   scope :published, -> { where(status: 'published') }
   scope :recent, -> { order(published_at: :desc) }
   before_save :generate_slug
+  
 
 def generate_slug
   self.slug = title.parameterize if slug.blank?
 end
+def views
+    Ahoy::Event.where(name: 'Viewed Post').where("properties ->> 'post_id' = ?", id.to_s)
+  end
+
+  def views_count
+    views.count
+  end
 end

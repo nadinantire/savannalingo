@@ -62,4 +62,5 @@ gem 'sassc-rails'
 gem 'trix'
 gem 'actiontext'
 gem "jsbundling-rails"
+gem 'ahoy_matey'
 

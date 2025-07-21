@@ -260,8 +260,9 @@
  <!-- Blog Banner -->
     <section class="blog-banner">
         <div class="container">
-            <h1>Savanna Lingo Posts</h1>
-            <p>Insights and expertise on translation, social media marketing, and content creation</p>
+            <h1>Savanna Lingo Blogs</h1>
+            <p>Dive into thoughtful perspectives on politics, social issues, entertainment, and poetry.</p>
+            <p>Explore trending stories and creative voices shaping today's conversations.</p>
         </div>
     </section>
 
@@ -280,15 +281,21 @@
                     </div>
                     <div class="blog-post-content">
                         <div class="blog-post-meta">
+                        
                             <div class="meta-item">
-                                <span></strong> <%= post.published_at.strftime("%B %d, %Y %I:%M %p") if post.published_at %></span>
+                                <span><strong>Created by:</strong> <%= post.user.name %></span>
+                            </div>
+                            <% total_views = Ahoy::Event.where(name: "Viewed Post")
+                            .where("properties ->> 'post_id' = ?", post.id.to_s)
+                            .count %>
+
+                            <div class="meta-item">
+                            <span><strong>Views:</strong> <%= total_views %></span>
                             </div>
                             <div class="meta-item">
-                                <span><%= post.user.name %></span>
+                                <span><strong><%= time_ago_in_words(post.published_at).gsub(/^about\s/, '') + ' ago' if post.published_at %></strong></span>
                             </div>
-                            <div class="meta-item">
-                                <span><%= post.category.name %></span>
-                            </div>
+
                         </div>
                         <h2 class="blog-post-title"><%= post.title %></h2>
                         <p><%= post.body %></p>

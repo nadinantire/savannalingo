@@ -474,7 +474,7 @@ html, body {
 
         /* Search Bar */
         .search-container {
-            margin-bottom: 2rem;
+            margin-bottom: 1rem;
         }
 
         .search-box {
@@ -490,8 +490,8 @@ html, body {
             flex: 1;
             border: none;
             background: transparent;
-            padding: 0.5rem;
-            font-size: 0.9rem;
+            padding: 0.3rem;
+            font-size: 0.6rem;
             outline: none;
         }
 
@@ -500,7 +500,7 @@ html, body {
             border: none;
             color: var(--gray);
             cursor: pointer;
-            padding: 0.25rem;
+            padding: 0.1rem;
         }
 
         /* Latest Posts */
@@ -597,9 +597,10 @@ html, body {
         /* Blog Preview Section */
         .blog-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(4, 1fr); /* Exactly 4 cards per row */
             gap: 2rem;
         }
+
         
         .blog-card {
             background-color: white;
@@ -1222,6 +1223,18 @@ html, body {
                             <div class="blog-date">April 20, 2025</div>
                             <h3 class="blog-title">5 Tips for Effective Multilingual Marketing</h3>
                             <p>Learn how to create marketing campaigns that resonate across different cultures and languages.</p>
+                            <a href="blog.html" class="read-more">Read More →</a>
+                        </div>
+                    </div>
+                    <div class="blog-card">
+                        <div class="blog-img">
+                            <%= image_tag("dreamstime_l_45807030-300x276-1.jpg", alt: "Translation Service") %>
+                        
+                        </div>
+                        <div class="blog-content">
+                            <div class="blog-date">April 15, 2025</div>
+                            <h3 class="blog-title">The Importance of Cultural Context in Translation</h3>
+                            <p>Why cultural nuance matters when translating content for international audiences.</p>
                             <a href="blog.html" class="read-more">Read More →</a>
                         </div>
                     </div>

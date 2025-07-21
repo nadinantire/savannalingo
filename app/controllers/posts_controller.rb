@@ -23,7 +23,10 @@ end
   def show
     @post = Post.find_by(slug: params[:id]) || Post.find_by(id: params[:id])
     @recent_posts = Post.published.order(published_at: :desc).limit(5)
-  end
+      ahoy.track("Viewed Post", post_id: @post.id) if @post
+
+end
+
 
   # GET /posts/new
   def new

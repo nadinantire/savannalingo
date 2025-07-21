@@ -78,6 +78,10 @@ GEM
       tzinfo (~> 2.0, >= 2.0.5)
     addressable (2.8.7)
       public_suffix (>= 2.0.2, < 7.0)
+    ahoy_matey (5.4.0)
+      activesupport (>= 7.1)
+      device_detector (>= 1)
+      safely_block (>= 0.4)
     ast (2.4.3)
     base64 (0.3.0)
     bcrypt (3.1.20)
@@ -105,6 +109,7 @@ GEM
       railties (>= 6.0.0)
     csv (3.3.5)
     date (3.4.1)
+    device_detector (1.1.3)
     devise (4.9.4)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -309,6 +314,7 @@ GEM
       ffi (~> 1.12)
       logger
     rubyzip (2.4.1)
+    safely_block (0.5.0)
     sassc (2.4.0)
       ffi (~> 1.9)
     sassc-rails (2.1.2)
@@ -377,6 +383,7 @@ PLATFORMS
 
 DEPENDENCIES
   actiontext
+  ahoy_matey
   bootsnap
   brakeman
   capybara

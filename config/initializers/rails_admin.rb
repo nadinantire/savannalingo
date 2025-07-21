@@ -34,16 +34,28 @@ RailsAdmin.config do |config|
 
   ### == Hide associations from all models ==
   Rails.application.config.to_prepare do
-    ActiveRecord::Base.descendants.each do |model|
-      next if model.abstract_class?
+  ActiveRecord::Base.descendants.each do |model|
+    next if model.abstract_class?
 
-      config.model model.name do
-        [:edit, :show, :create].each do |section|
-          send(section) do
-            fields_of_type :has_many, :has_one, :belongs_to do
-              hide
-            end
+    config.model model.name do
+      [:edit, :show, :create].each do |section|
+        send(section) do
+          fields_of_type [:has_many, :has_one, :belongs_to] do
+            hide
           end
+        end
+      end
+    end
+  end
+end
+ config.model 'Post' do
+    list do 
+      field :title
+      field :status
+      field :published_at
+      field :view_count do
+        pretty_value do
+          bindings[:object].views_count
         end
       end
     end
