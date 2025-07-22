@@ -157,20 +157,22 @@
       box-shadow: 0 4px 8px rgba(220, 38, 38, 0.3);
     }
 
-    .sl-mobile-menu-btn {
-  display: none;
+   .sl-mobile-menu-btn {
+  display: none;  /* hide by default */
   background: none;
   border: 2px solid var(--dark);  /* border color */
-  border-radius: 20%;             /* makes it perfectly round */
-  width: 44px;                   /* fixed width */
-  height: 44px;                  /* fixed height */
+  border-radius: 20%;             /* rounded border */
+  width: 44px;
+  height: 44px;
   font-size: 1.8rem;
   cursor: pointer;
   color: var(--dark);
-  display: flex;                 /* center icon */
+
+  /* Center the icon inside the button */
   align-items: center;
   justify-content: center;
   transition: background-color 0.3s ease, color 0.3s ease;
+  /* remove display:flex here */
 }
 
 .sl-mobile-menu-btn:hover {
@@ -183,6 +185,7 @@
     display: flex;  /* show only on mobile */
   }
 }
+
 
 
     /* Dropdown */
