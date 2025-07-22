@@ -158,13 +158,32 @@
     }
 
     .sl-mobile-menu-btn {
-      display: none;
-      background: none;
-      border: none;
-      font-size: 2rem; /* Increased for visibility */
-      cursor: pointer;
-      color: var(--dark);
-    }
+  display: none;
+  background: none;
+  border: 2px solid var(--dark);  /* border color */
+  border-radius: 20%;             /* makes it perfectly round */
+  width: 44px;                   /* fixed width */
+  height: 44px;                  /* fixed height */
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: var(--dark);
+  display: flex;                 /* center icon */
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.sl-mobile-menu-btn:hover {
+  background-color: var(--primary);
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .sl-mobile-menu-btn {
+    display: flex;  /* show only on mobile */
+  }
+}
+
 
     /* Dropdown */
     .sl-dropdown {
