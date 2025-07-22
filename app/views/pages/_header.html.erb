@@ -305,18 +305,19 @@
 
       <div class="sl-nav-center">
         <ul class="sl-nav-links">
-          <li><%= link_to 'Home', root_path, class: "active" %></li>
-          <li><%= link_to 'About', about_path %></li>
-          <li><%= link_to 'Blogs', stories_path %></li>
+  <li><%= link_to 'Home', root_path, class: ("active" if current_page?(root_path)) %></li>
+  <li><%= link_to 'About', about_path, class: ("active" if current_page?(about_path)) %></li>
+  <li><%= link_to 'Blogs', stories_path, class: ("active" if current_page?(stories_path)) %></li>
 
-          <!-- Dropdown for Creative Work -->
-          <li class="sl-dropdown">
-            <a href="#">Creative Works</a>
-            <ul class="sl-dropdown-menu">
-              <li><%= link_to 'Books', books_path %></li>
-              <li><%= link_to 'Templates', books_path %></li>
-              <li><%= link_to 'Crafts', books_path %></li>
-            </ul>
+  <% creative_paths = [books_path, books_path, books_path] %>
+  <li class="sl-dropdown <%= 'active' if creative_paths.any? { |path| current_page?(path) } %>">
+    <a href="#">Creative Works</a>
+    <ul class="sl-dropdown-menu">
+      <li><%= link_to 'Books', books_path, class: ("active" if current_page?(books_path)) %></li>
+      <li><%= link_to 'Templates', books_path, class: ("active" if current_page?(books_path)) %></li>
+      <li><%= link_to 'Crafts', books_path, class: ("active" if current_page?(books_path)) %></li>
+    </ul>
+  </li>
           </li>
 
           <% if user_signed_in? %>
