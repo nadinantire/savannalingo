@@ -305,9 +305,13 @@
 
       <div class="sl-nav-center">
         <ul class="sl-nav-links">
-  <li><%= link_to 'Home', root_path, class: ("active" if current_page?(root_path)) %></li>
-  <li><%= link_to 'About', about_path, class: ("active" if current_page?(about_path)) %></li>
-  <li><%= link_to 'Blogs', stories_path, class: ("active" if current_page?(stories_path)) %></li>
+          <li><%= link_to 'Home', root_path, class: ("active" if current_page?(root_path)) %></li>
+          <li><%= link_to 'About', about_path, class: ("active" if current_page?(about_path)) %></li>
+          <a href="mailto:nadinantire@gmail.com">Test Mailto Link</a>
+
+          <li><%= link_to 'Contact', new_contact_path, class: ("active" if current_page?(new_contact_path)) %></li>
+        
+          <li><%= link_to 'Blog', stories_path, class: ("active" if current_page?(stories_path)) %></li>
 
   <% creative_paths = [books_path, books_path, books_path] %>
   <li class="sl-dropdown <%= 'active' if creative_paths.any? { |path| current_page?(path) } %>">

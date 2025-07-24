@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
+  get "contacts/new"
+  get "contacts/create"
   get "pages/home"
   get 'about', to: 'pages#about'
   get 'stories', to: 'pages#stories'
+  get 'pages/contact'
+
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   resources :books
  resources :posts do
@@ -23,6 +27,9 @@ get 'categories/:id/posts', to: 'categories#user_posts', as: 'category_posts'
 
   # Defines the root path route ("/")
   root "pages#home"
+  get 'contact', to: 'contacts#new', as: 'new_contact'
+  post 'contacts', to: 'contacts#create', as: 'contacts'
+ 
 
   
 end
