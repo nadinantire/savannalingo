@@ -1,26 +1,45 @@
-<h2>Contact Us</h2>
+<div style="max-width: 900px; margin: 40px auto; padding: 20px; background-color: #f9f9f9; border-radius: 10px; display: flex; gap: 30px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
 
-<%= form_with url: contacts_path, method: :post, local: true do |form| %>
-  <div>
-    <%= form.label :name %><br>
-    <%= form.text_field :name, required: true %>
+  <!-- Contact Form -->
+  
+  <div style="flex: 1; padding-right: 20px; border-right: 1px solid #ddd;">
+    <h2 style="margin-bottom: 20px;">Contact Us</h2>
+
+   <a href="https://mail.google.com/mail/?view=cm&to=donat@savannalingo.com&su=&body=" 
+   target="_blank" 
+   id="email-link"
+   style="display: inline-block; background-color: #3b82f6; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none; font-weight: bold;">
+  Email Us
+</a>
+
   </div>
 
-  <div>
-    <%= form.label :email %><br>
-    <%= form.email_field :email, required: true %>
-  </div>
+  <!-- Contact Info Cards -->
+  <div style="flex: 1; display: flex; flex-direction: column; gap: 15px;">
+   <h3 style="margin-bottom: 20px;">Get in Touch</h3>
 
-  <div>
-    <%= form.label :message %><br>
-    <%= form.text_area :message, required: true %>
-  </div>
+    <div style="background: #fff; border-radius: 8px; padding: 15px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+      <span style="color: #3b82f6; font-size: 18px;">📍</span>
+      <strong style="margin-left: 8px;">Location:</strong> Kigali, Rwanda
+    </div>
 
-  <div>
-    <%= form.submit "Send" %>
-  </div>
-<% end %>
+    <div style="background: #fff; border-radius: 8px; padding: 15px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+      <span style="color: #3b82f6; font-size: 18px;">📞</span>
+      <strong style="margin-left: 8px;">Phone:</strong>
+      <a href="tel:+250789123456" style="color: #3b82f6; text-decoration: none;">+250 789 171 755</a>
+    </div>
 
-<% if flash[:notice] %>
-  <p style="color: green"><%= flash[:notice] %></p>
-<% end %>
+    <div style="background: #fff; border-radius: 8px; padding: 15px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+      <span style="color: #3b82f6; font-size: 18px;">💬</span>
+      <strong style="margin-left: 8px;">WhatsApp:</strong>
+      <a href="https://wa.me/250789171755" target="_blank" style="color: #3b82f6; text-decoration: none;">Chat on WhatsApp</a>
+    </div>
+
+    <div style="background: #fff; border-radius: 8px; padding: 15px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+      <span style="color: #3b82f6; font-size: 18px;">✉️</span>
+      <strong style="margin-left: 8px;">Email:</strong>
+      <a href="mailto:donat@savannalingo.com" style="color: #3b82f6; text-decoration: none;">donat@savannalingo.com</a>
+    </div>
+
+  </div>
+</div>
