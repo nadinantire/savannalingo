@@ -72,7 +72,7 @@ Rails.application.configure do
   port:                 587,
   user_name:            'donat@savannalingo.com',
   password:             'Ngabo25@',
-  authentication:       'plain',
+  authentication:       'login',
   enable_starttls_auto: true
 }
 
