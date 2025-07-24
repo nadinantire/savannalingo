@@ -5,7 +5,11 @@ class ContactMailer < ApplicationMailer
     @name = name
     @email = email
     @message = message
+    mail(
+      from: "donat@savannalingo.com",
+      reply_to: email,
+      subject: "New Contact Message"
+    )
 
-    mail(from: email, subject: 'New Contact Message')
   end
 end
